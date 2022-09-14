@@ -1,7 +1,5 @@
 <template>
-  <div class="home">
-    <p class="text-2xl text-blue-400 font-bold">Lorem ipsum.</p>
-  </div>
+  <div class="home"></div>
 </template>
 
 <script>
