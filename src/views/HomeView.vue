@@ -19,7 +19,7 @@
           <activity-card />
           <activity-card />
         </div>
-        <!-- <activity-empty-state /> -->
+        <!-- <empty-state-image /> -->
       </div>
     </div>
   </div>
@@ -28,7 +28,7 @@
 <script>
 // @ is an alias to /src
 import AddButton from "@/components/AddButton.vue";
-// import ActivityEmptyState from "@/components/ActivityEmptyState.vue";
+// import EmptyStateImage from "@/components/EmptyStateImage.vue";
 import ActivityCard from "@/components/ActivityCard.vue";
 
 export default {

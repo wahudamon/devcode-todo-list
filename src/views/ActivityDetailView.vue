@@ -16,16 +16,20 @@
           <add-button />
         </div>
       </div>
+      <div class="mt-8">
+        <empty-state-image />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import AddButton from "@/components/AddButton.vue";
+import EmptyStateImage from "@/components/EmptyStateImage.vue";
 
 export default {
   name: "ActivityDetailView",
-  components: { AddButton },
+  components: { AddButton, EmptyStateImage },
 };
 </script>
 
