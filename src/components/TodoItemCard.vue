@@ -1,11 +1,16 @@
 <template>
   <div
     data-cy="todo-item-card"
-    class="w-full h-full p-4 rounded-xl cursor-pointer todo-item-card"
+    class="w-full h-full p-4 rounded-xl todo-item-card"
   >
     <div class="flex justify-between todo-item-card_body">
       <div class="flex gap-4">
-        <input data-cy="todo-item-checkbox" type="checkbox" value="completed" />
+        <input
+          data-cy="todo-item-checkbox"
+          class="cursor-pointer"
+          type="checkbox"
+          value="completed"
+        />
         <div
           data-cy="todo-item-priority-indicator"
           class="mt-2 w-2 h-2 rounded-full bg-red-600"
