@@ -21,5 +21,6 @@ export default {
 body {
   font-family: "Poppins", sans-serif;
   height: "100%";
+  background: #e5e5e5;
 }
 </style>
