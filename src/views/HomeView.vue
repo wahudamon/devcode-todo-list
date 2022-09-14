@@ -5,6 +5,9 @@
         <h2 data-cy="activity-title" class="text-4xl font-bold">Activity</h2>
         <add-button />
       </div>
+      <div class="mt-8">
+        <activity-empty-state />
+      </div>
     </div>
   </div>
 </template>
@@ -12,9 +15,10 @@
 <script>
 // @ is an alias to /src
 import AddButton from "@/components/AddButton.vue";
+import ActivityEmptyState from "@/components/ActivityEmptyState.vue";
 
 export default {
   name: "HomeView",
-  components: { AddButton },
+  components: { AddButton, ActivityEmptyState },
 };
 </script>
