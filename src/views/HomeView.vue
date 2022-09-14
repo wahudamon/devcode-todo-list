@@ -6,7 +6,20 @@
         <add-button />
       </div>
       <div class="mt-8">
-        <activity-empty-state />
+        <div
+          data-cy="activity-card-list"
+          class="flex flex-wrap gap-4 justify-center"
+        >
+          <activity-card />
+          <activity-card />
+          <activity-card />
+          <activity-card />
+          <activity-card />
+          <activity-card />
+          <activity-card />
+          <activity-card />
+        </div>
+        <!-- <activity-empty-state /> -->
       </div>
     </div>
   </div>
@@ -15,10 +28,11 @@
 <script>
 // @ is an alias to /src
 import AddButton from "@/components/AddButton.vue";
-import ActivityEmptyState from "@/components/ActivityEmptyState.vue";
+// import ActivityEmptyState from "@/components/ActivityEmptyState.vue";
+import ActivityCard from "@/components/ActivityCard.vue";
 
 export default {
   name: "HomeView",
-  components: { AddButton, ActivityEmptyState },
+  components: { AddButton, ActivityCard },
 };
 </script>
