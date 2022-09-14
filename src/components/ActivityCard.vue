@@ -1,6 +1,9 @@
 <template>
-  <!-- add router-link here... -->
-  <div data-cy="activity-card" class="w-1/5 h-1/5 p-4 rounded-xl activity-card">
+  <div
+    data-cy="activity-card"
+    class="w-1/5 h-1/5 p-4 rounded-xl cursor-pointer activity-card"
+    @click="$router.push('/detail')"
+  >
     <div class="pb-28 activity-card_body">
       <p data-cy="activity-card-title" class="text-md font-bold">
         Daftar Belanja Bulanan Saya dan Anak
