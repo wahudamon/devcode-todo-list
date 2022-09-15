@@ -6,12 +6,12 @@
   >
     <div class="pb-28 activity-card_body">
       <p data-cy="activity-card-title" class="text-md font-bold">
-        Daftar Belanja Bulanan Saya dan Anak
+        {{ title }}
       </p>
     </div>
     <div class="flex justify-between activity-card_footer">
       <p data-cy="activity-card-date" class="mt-1 text-sm font-light">
-        14 September 2022
+        {{ date }}
       </p>
       <button data-cy="activity-card-delete-button">
         <span class="icon-delete-activity-item"></span>
@@ -23,6 +23,11 @@
 <script>
 export default {
   name: "ActivityCard",
+  props: {
+    id: String,
+    title: String,
+    date: String,
+  },
 };
 </script>
 

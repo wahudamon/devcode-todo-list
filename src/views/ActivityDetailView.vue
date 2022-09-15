@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="mt-8">
-        <!-- <empty-state-image /> -->
+        <empty-state-image pageName="activity-detail" />
         <div
           data-cy="todo-item-list"
           class="flex flex-col flex-wrap gap-4 justify-center"
@@ -32,12 +32,12 @@
 
 <script>
 import AddButton from "@/components/AddButton.vue";
-// import EmptyStateImage from "@/components/EmptyStateImage.vue";
+import EmptyStateImage from "@/components/EmptyStateImage.vue";
 import TodoItemCard from "@/components/TodoItemCard.vue";
 
 export default {
   name: "ActivityDetailView",
-  components: { AddButton, TodoItemCard },
+  components: { AddButton, TodoItemCard, EmptyStateImage },
 };
 </script>
 
