@@ -67,10 +67,6 @@ export default {
           email: "dururu@gmail.com",
         });
 
-        console.log("Success create new activity!");
-
-        this.loadActivity();
-
         return response;
       } catch {
         console.log(err);
