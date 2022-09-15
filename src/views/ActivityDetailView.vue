@@ -7,7 +7,11 @@
           <h2 data-cy="activity-detail-title" class="text-4xl font-bold">
             {{ activityDetailData.title }}
           </h2>
-          <span class="mt-2 icon-edit-title"></span>
+          <span
+            data-cy="edit-activity-title-button"
+            @click="changeActivityTitle"
+            class="mt-2 icon-edit-title"
+          ></span>
         </div>
         <div class="flex gap-4">
           <button class="px-3 border border-gray-300 rounded-full">
@@ -58,8 +62,21 @@ export default {
           `${this.baseUrl}/activity-groups/${this.$route.params.id}`
         );
 
-        console.log(response.data);
         this.activityDetailData = response.data;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async changeActivityTitle() {
+      try {
+        let response = await axios.patch(
+          `${this.baseUrl}/activity-groups/${this.$route.params.id}`,
+          {
+            title: "Betul Banget",
+          }
+        );
+
+        return response;
       } catch (err) {
         console.log(err);
       }
