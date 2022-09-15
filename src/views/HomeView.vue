@@ -3,7 +3,7 @@
     <div class="mt-10 mx-56">
       <div class="flex justify-between">
         <h2 data-cy="activity-title" class="text-4xl font-bold">Activity</h2>
-        <add-button />
+        <add-button :clickEvent="addNewActivity" />
       </div>
       <div class="mt-8">
         <div
@@ -38,7 +38,7 @@ export default {
   components: { AddButton, EmptyStateImage, ActivityCard },
   data() {
     return {
-      baseUrl: "https://todo.api.devcode.gethired.id/",
+      baseUrl: "https://todo.api.devcode.gethired.id",
       userEmail: "dururu@gmail.com",
       activityData: {},
     };
@@ -49,15 +49,30 @@ export default {
   methods: {
     async loadActivity() {
       try {
-        let response = await axios.get(`${this.baseUrl}activity-groups`, {
+        let response = await axios.get(`${this.baseUrl}/activity-groups`, {
           params: {
             email: this.userEmail,
           },
         });
 
-        console.log(response.data);
         this.activityData = response.data;
       } catch (err) {
+        console.log(err);
+      }
+    },
+    async addNewActivity() {
+      try {
+        let response = await axios.post(`${this.baseUrl}/activity-groups`, {
+          title: "New Activity",
+          email: "dururu@gmail.com",
+        });
+
+        console.log("Success create new activity!");
+
+        this.loadActivity();
+
+        return response;
+      } catch {
         console.log(err);
       }
     },

@@ -2,6 +2,7 @@
   <button
     data-cy="add-activity-button"
     class="px-8 py-3 rounded-3xl text-white text-lg font-medium add-button"
+    @click="clickEvent"
   >
     <span class="icon-plus"></span>
     Tambah
@@ -11,6 +12,9 @@
 <script>
 export default {
   name: "AddButton",
+  props: {
+    clickEvent: Function,
+  },
 };
 </script>
 
