@@ -11,7 +11,7 @@
     </div>
     <div class="flex justify-between activity-card_footer">
       <p data-cy="activity-card-date" class="mt-1 text-sm font-light">
-        {{ date }}
+        {{ formattedDate(date) }}
       </p>
       <button data-cy="activity-card-delete-button">
         <span class="icon-delete-activity-item"></span>
@@ -21,12 +21,19 @@
 </template>
 
 <script>
+import moment from "moment";
+
 export default {
   name: "ActivityCard",
   props: {
     id: String,
     title: String,
     date: String,
+  },
+  methods: {
+    formattedDate(value) {
+      return moment(value).locale("id").format("DD MMMM YYYY");
+    },
   },
 };
 </script>

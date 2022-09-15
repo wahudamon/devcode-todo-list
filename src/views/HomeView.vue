@@ -14,7 +14,7 @@
           <activity-card
             v-for="activity in activityData.data"
             :key="activity.id"
-            :id="activity.id"
+            :id="activity.id?.toString()"
             :title="activity.title"
             :date="activity.created_at"
           />
@@ -39,7 +39,7 @@ export default {
   data() {
     return {
       baseUrl: "https://todo.api.devcode.gethired.id/",
-      userEmail: "yoga%2B1%40skyshi.io",
+      userEmail: "dururu@gmail.com",
       activityData: {},
     };
   },
