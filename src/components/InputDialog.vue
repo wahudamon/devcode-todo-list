@@ -36,7 +36,10 @@
             <p class="mb-4 text-sm">Nama List Item</p>
             <p class="mb-4 text-sm">Prioritas</p>
             <div class="flex justify-end">
-              <button class="px-6 py-2 text-white bg-blue-800 rounded-full">
+              <button
+                class="px-6 py-2 text-white rounded-full"
+                style="background: #16abf8"
+              >
                 Simpan
               </button>
             </div>
