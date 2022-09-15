@@ -14,6 +14,7 @@
           <activity-card
             v-for="activity in activityData.data"
             :key="activity.id"
+            :id="activity.id"
             :title="activity.title"
             :date="activity.created_at"
           />
