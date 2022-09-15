@@ -1,5 +1,6 @@
 <template>
   <div class="activity-detail">
+    <input-dialog :showDialog="showDialog" />
     <div class="mt-10 mx-56">
       <div class="flex justify-between">
         <div class="flex gap-4">
@@ -17,7 +18,7 @@
           <button class="px-3 border border-gray-300 rounded-full">
             <span class="icon-sort"></span>
           </button>
-          <add-button />
+          <add-button :clickEvent="toggleDialog" />
         </div>
       </div>
       <div class="mt-8">
@@ -39,23 +40,28 @@
 import AddButton from "@/components/AddButton.vue";
 import EmptyStateImage from "@/components/EmptyStateImage.vue";
 import TodoItemCard from "@/components/TodoItemCard.vue";
+import InputDialog from "@/components/InputDialog.vue";
 
 import axios from "axios";
 
 export default {
   name: "ActivityDetailView",
-  components: { AddButton, TodoItemCard, EmptyStateImage },
+  components: { AddButton, TodoItemCard, EmptyStateImage, InputDialog },
   data() {
     return {
       baseUrl: "https://todo.api.devcode.gethired.id",
       userEmail: "dururu@gmail.com",
       activityDetailData: {},
+      showDialog: false,
     };
   },
   mounted() {
     this.loadDetailActivity();
   },
   methods: {
+    toggleDialog() {
+      this.showDialog = !this.showDialog;
+    },
     async loadDetailActivity() {
       try {
         let response = await axios.get(
