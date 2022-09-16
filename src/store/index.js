@@ -100,6 +100,22 @@ export default createStore({
         console.log(err);
       }
     },
+    async updateTodoItem(context, payload) {
+      try {
+        let response = await axios.patch(
+          `${baseUrl}/todo-items/${payload.id}`,
+          {
+            title: payload.title,
+            priority: payload.priority,
+            is_active: payload.is_active,
+          }
+        );
+
+        return response.data;
+      } catch (err) {
+        console.log(err);
+      }
+    },
     async removeTodoItem(context, payload) {
       try {
         let response = await axios.delete(

@@ -3,10 +3,10 @@
     <div class="flex justify-between todo-item-card_body">
       <div class="flex gap-4">
         <input
+          v-model="todoCheckbox"
           data-cy="todo-item-checkbox"
           class="cursor-pointer"
           type="checkbox"
-          value="completed"
         />
         <div data-cy="todo-item-priority-indicator">
           <div
@@ -42,9 +42,13 @@
               : todoItem.title
           }}
         </p>
-        <div data-cy="todo-item-edit-button" class="icon-edit-todo-item"></div>
+        <div
+          data-cy="todo-item-edit-button"
+          class="cursor-pointer icon-edit-todo-item"
+          @click="updateTodoItem"
+        ></div>
       </div>
-      <button data-cy="activity-card-delete-button" @click="removeTodoItem">
+      <button data-cy="todo-item-delete-button" @click="removeTodoItem">
         <span class="icon-delete-activity-item"></span>
       </button>
     </div>
@@ -60,9 +64,24 @@ export default {
     todoItem: Object,
   },
   data() {
-    return {};
+    return {
+      todoCheckbox: false,
+    };
   },
   methods: {
+    async updateTodoItem() {
+      try {
+        await store.dispatch("updateTodoItem", {
+          id: this.todoItem.id,
+          title: "Abis diubah",
+          priority: "low",
+          is_active: 1,
+        });
+        this.$parent.loadDetailActivity();
+      } catch (err) {
+        console.log(err);
+      }
+    },
     async removeTodoItem() {
       try {
         await store.dispatch("removeTodoItem", { id: this.todoItem.id });
