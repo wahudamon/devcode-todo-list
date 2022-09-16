@@ -17,7 +17,7 @@
         <div>
           <p
             v-if="todoItem.is_active === 1"
-            data-cy="todo-item-card-title"
+            data-cy="todo-title"
             class="text-md font-normal"
           >
             {{
@@ -28,7 +28,7 @@
           </p>
           <p
             v-else-if="todoItem.is_active === 0"
-            data-cy="todo-item-card-title"
+            data-cy="todo-title"
             class="text-md font-normal line-through"
             style="color: #888888"
           >

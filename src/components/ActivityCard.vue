@@ -1,5 +1,5 @@
 <template>
-  <div data-cy="activity-card" class="w-1/5 h-1/5 p-4 rounded-xl activity-card">
+  <div class="w-1/5 h-1/5 p-4 rounded-xl activity-card">
     <div
       class="pb-28 cursor-pointer activity-card_body"
       @click="$router.push(`/detail/${id}`)"

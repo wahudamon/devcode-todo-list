@@ -36,7 +36,7 @@
             <span class="icon-sort"></span>
           </button>
           <add-button
-            data-cy="new-todo-item-button"
+            data-cy="todo-add-button"
             :clickEvent="toggleInputDialog"
           />
         </div>

@@ -38,7 +38,7 @@
             </div>
             <div>
               <input
-                data-cy="todo-input-title-box"
+                data-cy="modal-add-name-input"
                 v-model="input.title"
                 class="h-4/5 w-3/5 p-1 bg-inherit border border-gray-700 rounded-md text-md focus:outline-none"
                 type="text"
@@ -50,15 +50,18 @@
               >
             </div>
             <div>
-              <priority-combobox @get-priority="getPriority" />
+              <priority-combobox
+                data-cy="modal-add-priority-dropdown"
+                @get-priority="getPriority"
+              />
             </div>
           </div>
           <div
             data-cy="todo-input-dialog-footer"
-            class="flex justify-end pt-12"
+            class="flex justify-end pt-12 submit-button"
           >
             <button
-              data-cy="todo-item-submit-button"
+              data-cy="modal-add-save-button"
               :disabled="input.title === ''"
               class="px-6 py-2 text-white rounded-full"
               style="background: #16abf8"

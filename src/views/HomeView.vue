@@ -19,6 +19,7 @@
             :title="activity.title"
             :date="activity.created_at"
             :getActivity="loadActivity"
+            data-cy="activity-item"
           />
         </div>
         <empty-state-image v-else pageName="home" />
