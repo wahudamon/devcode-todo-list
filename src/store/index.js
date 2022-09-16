@@ -7,22 +7,22 @@ const userEmail = "dururu@gmail.com";
 export default createStore({
   state: {
     activityData: {},
-    inputActivityDialog: false,
+    inputDialog: false,
   },
   getters: {
     activityData(state) {
       return state.activityData;
     },
     inputActivityDialog(state) {
-      return state.inputActivityDialog;
+      return state.inputDialog;
     },
   },
   mutations: {
     GET_ACTIVITY_DATA(state, { data }) {
       state.activityData = data;
     },
-    TOGGLE_ACTIVITY_DIALOG(state) {
-      state.inputActivityDialog = !state.inputActivityDialog;
+    TOGGLE_INPUT_DIALOG(state) {
+      state.inputDialog = !state.inputDialog;
     },
   },
   actions: {
@@ -91,7 +91,43 @@ export default createStore({
         console.log(err);
       }
     },
-    toggleActivityDialog({ commit }) {
+    async addNewTodoItem(context, payload) {
+      try {
+        let response = await axios.post(`${baseUrl}/todo-items`, payload);
+
+        return response.data;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async updateTodoItem(context, payload) {
+      try {
+        let response = await axios.patch(
+          `${baseUrl}/todo-items/${payload.id}`,
+          {
+            title: payload.title,
+            priority: payload.priority,
+            is_active: payload.is_active,
+          }
+        );
+
+        return response.data;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async removeTodoItem(context, payload) {
+      try {
+        let response = await axios.delete(
+          `${baseUrl}/todo-items/${payload.id}`
+        );
+
+        return response.data;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    toggleInputDialog({ commit }) {
       commit("TOGGLE_ACTIVITY_DIALOG");
     },
   },

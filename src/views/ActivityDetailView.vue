@@ -34,7 +34,10 @@
           <button class="px-3 border border-gray-300 rounded-full">
             <span class="icon-sort"></span>
           </button>
-          <add-button :clickEvent="toggleDialog" />
+          <add-button
+            data-cy="new-todo-item-button"
+            :clickEvent="addNewTodoItem"
+          />
         </div>
       </div>
       <div class="mt-8">
@@ -43,8 +46,12 @@
           v-if="activityDetailData.todo_items?.length !== 0"
           class="flex flex-col flex-wrap gap-4 justify-center"
         >
-          <todo-item-card />
-          <todo-item-card />
+          <todo-item-card
+            v-for="todoItem in activityDetailData.todo_items"
+            data-cy="todo-item-card"
+            :key="todoItem.id"
+            :todoItem="todoItem"
+          />
         </div>
         <empty-state-image v-else pageName="activity-detail" />
       </div>
@@ -67,8 +74,6 @@ export default {
 
   data() {
     return {
-      baseUrl: "https://todo.api.devcode.gethired.id",
-      userEmail: "dururu@gmail.com",
       activityDetailData: {},
       showInputText: false,
       inputTextValue: "",
@@ -108,6 +113,18 @@ export default {
       } else {
         this.inputTextValue = this.activityDetailData?.title;
         this.showInputText = true;
+      }
+    },
+    async addNewTodoItem() {
+      try {
+        await store.dispatch("addNewTodoItem", {
+          activity_group_id: this.$route.params.id,
+          title: "Boleh juga",
+          priority: "high",
+        });
+        this.loadDetailActivity();
+      } catch (err) {
+        console.log(err);
       }
     },
   },
