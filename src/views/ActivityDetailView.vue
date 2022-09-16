@@ -1,6 +1,9 @@
 <template>
   <div class="activity-detail">
-    <input-dialog data-cy="todo-item-input-dialog" />
+    <input-dialog
+      data-cy="todo-item-input-dialog"
+      :selectedTodo="selectedTodo"
+    />
     <confirm-dialog data-cy="todo-delete-confirm-dialog" />
     <div class="mt-10 mx-56">
       <div class="flex justify-between">
@@ -52,6 +55,7 @@
             data-cy="todo-item-card"
             :key="todoItem.id"
             :todoItem="todoItem"
+            @get-todo-detail="detailTodoItem"
           />
         </div>
         <empty-state-image v-else pageName="activity-detail" />
@@ -68,7 +72,6 @@ import InputDialog from "@/components/InputDialog.vue";
 import ConfirmDialog from "@/components/ConfirmDialog.vue";
 
 import store from "@/store";
-import { mapGetters } from "vuex";
 
 export default {
   name: "ActivityDetailView",
@@ -83,16 +86,13 @@ export default {
 
   data() {
     return {
+      selectedTodo: {},
       activityDetailData: {},
       showInputText: false,
       inputTextValue: "",
       showDialog: false,
     };
   },
-
-  computed: mapGetters({
-    selectedTodo: "selectedTodo",
-  }),
 
   mounted() {
     this.loadDetailActivity();
@@ -102,10 +102,22 @@ export default {
     toggleInputDialog(value) {
       store.dispatch("toggleInputDialog", { value });
     },
+    resetSelectedTodo() {
+      this.selectedTodo = {};
+    },
     async loadDetailActivity() {
       try {
         this.activityDetailData = await store.dispatch("detailActivity", {
           id: this.$route.params.id,
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async detailTodoItem(id) {
+      try {
+        this.selectedTodo = await store.dispatch("detailTodo", {
+          id,
         });
       } catch (err) {
         console.log(err);

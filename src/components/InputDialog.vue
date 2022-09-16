@@ -84,6 +84,9 @@ import PriorityCombobox from "@/components/PriorityCombobox.vue";
 export default {
   name: "InputDialog",
   components: { PriorityCombobox },
+  props: {
+    selectedTodo: Object,
+  },
   data() {
     return {
       isShow: false,
@@ -100,9 +103,13 @@ export default {
     showInputDialog(val) {
       this.isShow = val;
     },
+    selectedTodo(val) {
+      this.input.title = val.title;
+    },
   },
   methods: {
     toggleDialog(value) {
+      this.$parent.resetSelectedTodo();
       store.dispatch("toggleInputDialog", { value });
     },
     getPriority(value) {
@@ -123,6 +130,19 @@ export default {
 
       this.input.title = "";
       this.input.priority = "";
+    },
+    async updateTodoItem() {
+      try {
+        await store.dispatch("updateTodoItem", {
+          id: this.selectedTodo.id,
+          title: this.input.title,
+          priority: this.input.priority,
+          is_active: this.selectedTodo.is_active,
+        });
+        this.$parent.loadDetailActivity();
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
 };

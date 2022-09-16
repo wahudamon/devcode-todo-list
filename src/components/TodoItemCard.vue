@@ -65,6 +65,7 @@ export default {
   },
   data() {
     return {
+      selectedTodoData: {},
       todoCheckbox: false,
       priorityColor: {
         "very-high": "#ed4c5c",
@@ -77,7 +78,7 @@ export default {
   },
   watch: {
     todoCheckbox() {
-      this.updateTodoItem();
+      this.updateTodoItemStatus();
     },
   },
   methods: {
@@ -90,24 +91,22 @@ export default {
       store.dispatch("toggleConfirmDialog", { value });
     },
     toggleInputDialog(value) {
-      this.detailTodoItem();
+      this.$emit("get-todo-detail", this.todoItem.id);
       store.dispatch("toggleInputDialog", { value });
     },
     async detailTodoItem() {
       try {
-        await store.dispatch("detailTodo", {
+        this.selectedTodoData = await store.dispatch("newDetailTodo", {
           id: this.todoItem.id,
         });
       } catch (err) {
         console.log(err);
       }
     },
-    async updateTodoItem() {
+    async updateTodoItemStatus() {
       try {
         await store.dispatch("updateTodoItem", {
           id: this.todoItem.id,
-          title: "Abis diubah",
-          priority: "low",
           is_active: this.todoCheckbox ? 0 : 1,
         });
         this.$parent.loadDetailActivity();

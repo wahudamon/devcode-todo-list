@@ -12,7 +12,6 @@ export default createStore({
       id: "",
       title: "",
     },
-    selectedTodo: {},
     showInputDialog: false,
     showConfirmDialog: false,
   },
@@ -22,9 +21,6 @@ export default createStore({
     },
     selectedItem(state) {
       return state.selectedItem;
-    },
-    selectedTodo(state) {
-      return state.selectedTodo;
     },
     showInputDialog(state) {
       return state.showInputDialog;
@@ -41,9 +37,6 @@ export default createStore({
       state.selectedItem.type = type;
       state.selectedItem.id = id;
       state.selectedItem.title = title;
-    },
-    SET_SELECTED_TODO(state, data) {
-      state.selectedTodo = data;
     },
     TOGGLE_INPUT_DIALOG(state, { value }) {
       state.showInputDialog = value;
@@ -128,11 +121,9 @@ export default createStore({
         console.log(err);
       }
     },
-    async detailTodo({ commit }, payload) {
+    async detailTodo(context, payload) {
       try {
         let response = await axios.get(`${baseUrl}/todo-items/${payload.id}`);
-
-        commit("SET_SELECTED_TODO", response.data);
 
         return response.data;
       } catch (err) {
