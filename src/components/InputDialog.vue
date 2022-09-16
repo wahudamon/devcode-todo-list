@@ -40,7 +40,7 @@
               <input
                 data-cy="todo-input-title-box"
                 v-model="input.title"
-                class="h-4/5 w-3/5 p-1 bg-inherit border-2 border-gray-700 rounded-md text-md focus:outline-none"
+                class="h-4/5 w-3/5 p-1 bg-inherit border border-gray-700 rounded-md text-md focus:outline-none"
                 type="text"
               />
             </div>
@@ -50,12 +50,13 @@
               >
             </div>
             <div>
-              <input
+              <priority-combobox />
+              <!-- <input
                 data-cy="todo-input-priority-box"
                 v-model="input.title"
                 class="h-4/5 w-3/5 p-1 bg-inherit border-2 border-gray-700 rounded-md text-md focus:outline-none"
                 type="text"
-              />
+              /> -->
             </div>
           </div>
           <div
@@ -81,8 +82,11 @@
 import { mapGetters } from "vuex";
 import store from "@/store";
 
+import PriorityCombobox from "@/components/PriorityCombobox.vue";
+
 export default {
   name: "InputDialog",
+  components: { PriorityCombobox },
   data() {
     return {
       isShow: false,
