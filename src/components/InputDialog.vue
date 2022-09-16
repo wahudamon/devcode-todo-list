@@ -65,7 +65,7 @@
               :disabled="input.title === ''"
               class="px-6 py-2 text-white rounded-full"
               style="background: #16abf8"
-              @click="addNewTodoItem"
+              @click="onClickSubmit"
             >
               Simpan
             </button>
@@ -116,6 +116,13 @@ export default {
     getPriority(value) {
       this.input.priority = value;
     },
+    onClickSubmit() {
+      if (this.inputMode === "edit") {
+        this.updateTodoItem();
+      } else {
+        this.addNewTodoItem();
+      }
+    },
     async addNewTodoItem() {
       try {
         await store.dispatch("addNewTodoItem", {
@@ -137,13 +144,18 @@ export default {
         await store.dispatch("updateTodoItem", {
           id: this.selectedTodo.id,
           title: this.input.title,
-          priority: this.input.priority,
+          // priority: this.input.priority,
           is_active: this.selectedTodo.is_active,
         });
+
+        this.toggleDialog(false);
         this.$parent.loadDetailActivity();
       } catch (err) {
         console.log(err);
       }
+
+      this.input.title = "";
+      this.input.priority = "";
     },
   },
 };
