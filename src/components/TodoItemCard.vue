@@ -93,6 +93,11 @@ export default {
   },
   methods: {
     toggleConfirmDialog(value) {
+      store.dispatch("setSelectedItem", {
+        type: "list item",
+        id: this.todoItem.id,
+        title: this.todoItem.title,
+      });
       store.dispatch("toggleConfirmDialog", { value });
     },
     async updateTodoItem() {

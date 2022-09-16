@@ -7,12 +7,20 @@ const userEmail = "dururu@gmail.com";
 export default createStore({
   state: {
     activityData: {},
+    selectedItem: {
+      type: "",
+      id: "",
+      title: "",
+    },
     showInputDialog: false,
     showConfirmDialog: false,
   },
   getters: {
     activityData(state) {
       return state.activityData;
+    },
+    selectedItem(state) {
+      return state.selectedItem;
     },
     showInputDialog(state) {
       return state.showInputDialog;
@@ -24,6 +32,11 @@ export default createStore({
   mutations: {
     GET_ACTIVITY_DATA(state, { data }) {
       state.activityData = data;
+    },
+    SET_SELECTED_ITEM(state, { type, id, title }) {
+      state.selectedItem.type = type;
+      state.selectedItem.id = id;
+      state.selectedItem.title = title;
     },
     TOGGLE_INPUT_DIALOG(state, { value }) {
       state.showInputDialog = value;
@@ -134,6 +147,9 @@ export default createStore({
       } catch (err) {
         console.log(err);
       }
+    },
+    setSelectedItem({ commit }, { type, id, title }) {
+      commit("SET_SELECTED_ITEM", { type, id, title });
     },
     toggleInputDialog({ commit }, { value }) {
       commit("TOGGLE_INPUT_DIALOG", { value });

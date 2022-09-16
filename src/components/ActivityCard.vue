@@ -39,6 +39,11 @@ export default {
   },
   methods: {
     toggleConfirmDialog(value) {
+      store.dispatch("setSelectedItem", {
+        type: "activity",
+        id: this.id,
+        title: this.title,
+      });
       store.dispatch("toggleConfirmDialog", { value });
     },
     formattedDate(value) {

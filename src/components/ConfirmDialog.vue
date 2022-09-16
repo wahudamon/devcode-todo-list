@@ -11,8 +11,13 @@
           </div>
           <div class="mt-4 text-center">
             <p data-cy="confirm-dialog-text" class="mb-4 text-lg">
-              Apakah anda yakin menghapus activity <br />
-              <span class="font-bold">"Insert activity name”</span>?
+              Apakah anda yakin menghapus {{ selectedItem.type }} <br />
+              <span class="font-bold">{{
+                selectedItem.title?.length > 20
+                  ? `"${selectedItem.title.slice(0, 20)}..."`
+                  : `"${selectedItem.title}"`
+              }}</span
+              >?
             </p>
             <div class="flex justify-center gap-4">
               <button
@@ -25,7 +30,7 @@
               <button
                 data-cy="confirm-dialog-confirm-button"
                 class="px-6 py-2 rounded-full btn-confirm"
-                @click="toggleDialog(false)"
+                @click="removeItem"
               >
                 Hapus
               </button>
@@ -49,6 +54,7 @@ export default {
   },
   computed: mapGetters({
     showConfirmDialog: "showConfirmDialog",
+    selectedItem: "selectedItem",
   }),
   watch: {
     showConfirmDialog(val) {
@@ -58,6 +64,27 @@ export default {
   methods: {
     toggleDialog(value) {
       store.dispatch("toggleConfirmDialog", { value });
+    },
+    async removeItem() {
+      if (this.selectedItem.type === "activity") {
+        try {
+          await store.dispatch("removeActivity", { id: this.selectedItem.id });
+
+          this.$parent.loadActivity();
+          this.toggleDialog(false);
+        } catch (err) {
+          console.log(err);
+        }
+      } else if (this.selectedItem.type === "list item") {
+        try {
+          await store.dispatch("removeTodoItem", { id: this.selectedItem.id });
+
+          this.$parent.loadDetailActivity();
+          this.toggleDialog(false);
+        } catch (err) {
+          console.log(err);
+        }
+      }
     },
   },
 };
