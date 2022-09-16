@@ -42,11 +42,13 @@ import EmptyStateImage from "@/components/EmptyStateImage.vue";
 import TodoItemCard from "@/components/TodoItemCard.vue";
 import InputDialog from "@/components/InputDialog.vue";
 
-import axios from "axios";
+import store from "@/store";
 
 export default {
   name: "ActivityDetailView",
+
   components: { AddButton, TodoItemCard, EmptyStateImage, InputDialog },
+
   data() {
     return {
       baseUrl: "https://todo.api.devcode.gethired.id",
@@ -55,34 +57,31 @@ export default {
       showDialog: false,
     };
   },
+
   mounted() {
     this.loadDetailActivity();
   },
+
   methods: {
     toggleDialog() {
       this.showDialog = !this.showDialog;
     },
     async loadDetailActivity() {
       try {
-        let response = await axios.get(
-          `${this.baseUrl}/activity-groups/${this.$route.params.id}`
-        );
-
-        this.activityDetailData = response.data;
+        this.activityDetailData = await store.dispatch("detailActivity", {
+          id: this.$route.params.id,
+        });
       } catch (err) {
         console.log(err);
       }
     },
     async changeActivityTitle() {
       try {
-        let response = await axios.patch(
-          `${this.baseUrl}/activity-groups/${this.$route.params.id}`,
-          {
-            title: "Betul Banget",
-          }
-        );
-
-        return response;
+        await store.dispatch("updateActivity", {
+          id: this.$route.params.id,
+          title: "Betul Banget",
+        });
+        this.loadDetailActivity();
       } catch (err) {
         console.log(err);
       }
