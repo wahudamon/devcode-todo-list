@@ -6,7 +6,13 @@
         @click="isOptionsExpanded = !isOptionsExpanded"
         @blur="isOptionsExpanded = false"
       >
-        <span>{{ selectedOption }}</span>
+        <div class="flex gap-2">
+          <div
+            class="mt-1 w-3 h-3 rounded-full"
+            :style="{ background: selectedOption.color }"
+          ></div>
+          <span>{{ selectedOption.title }}</span>
+        </div>
         <svg
           fill="none"
           viewBox="0 0 24 24"
@@ -35,12 +41,16 @@
           class="absolute left-0 right-0 mb-4 bg-white divide-y rounded-lg shadow-lg overflow-hidden"
         >
           <li
-            v-for="(option, index) in options"
+            v-for="(option, index) in newOptions"
             :key="index"
-            class="px-3 py-2 transition-colors duration-300 hover:bg-gray-200"
+            class="px-3 py-2 flex gap-2 transition-colors duration-300 hover:bg-gray-200"
             @mousedown.prevent="setOption(option)"
           >
-            {{ option }}
+            <div
+              class="mt-1 w-3 h-3 rounded-full"
+              :style="{ background: option.color }"
+            ></div>
+            <p>{{ option.title }}</p>
           </li>
         </ul>
       </transition>
@@ -54,8 +64,15 @@ export default {
   data() {
     return {
       isOptionsExpanded: false,
-      selectedOption: "Normal",
+      selectedOption: { color: "#00a790", title: "Normal", value: "normal" },
       options: ["Very High", "High", "Normal", "Low", "Very Low"],
+      newOptions: [
+        { color: "#ed4c5c", title: "Very High", value: "very_high" },
+        { color: "#ffce31", title: "High", value: "high" },
+        { color: "#00a790", title: "Normal", value: "normal" },
+        { color: "#43c4e3", title: "Low", value: "low" },
+        { color: "#b01aff", title: "Very Low", value: "very_low" },
+      ],
     };
   },
   methods: {
