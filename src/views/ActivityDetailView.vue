@@ -1,14 +1,14 @@
 <template>
   <div class="activity-detail">
     <div class="mt-10 mx-56">
-      <div class="flex justify-between">
+      <div data-cy="todo-header" class="flex justify-between">
         <div class="flex gap-4">
           <span
             data-cy="todo-back-button"
             class="icon-back"
             @click="$router.push('/')"
           ></span>
-          <h2
+          <h1
             v-if="!showInputText"
             data-cy="todo-title"
             class="text-4xl font-bold"
@@ -18,20 +18,19 @@
                 ? `${activityDetailData.title.slice(0, 20)}...`
                 : activityDetailData.title
             }}
-          </h2>
+          </h1>
           <input
             v-else-if="showInputText"
-            data-cy="activity-title-input-text"
             v-model="inputTextValue"
             class="h-4/5 w-4/5 bg-inherit border-b-2 border-gray-700 text-3xl font-bold focus:outline-none"
             type="text"
             name="activityTitle"
           />
-          <span
-            data-cy="edit-activity-title-button"
+          <div
+            data-cy="todo-title-edit-button"
             @click="changeActivityTitle"
             class="mt-2 icon-edit-title"
-          ></span>
+          ></div>
         </div>
         <div class="flex gap-4">
           <button class="px-3 border border-gray-300 rounded-full">

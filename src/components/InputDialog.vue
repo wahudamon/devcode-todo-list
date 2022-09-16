@@ -36,9 +36,8 @@
                 >Nama List Item</label
               >
             </div>
-            <div>
+            <div data-cy="modal-add-name-input">
               <input
-                data-cy="modal-add-name-input"
                 v-model="input.title"
                 class="h-4/5 w-3/5 p-1 bg-inherit border border-gray-700 rounded-md text-md focus:outline-none"
                 type="text"
@@ -49,9 +48,8 @@
                 >Prioritas</label
               >
             </div>
-            <div>
+            <div data-cy="modal-add-priority-dropdown">
               <priority-combobox
-                data-cy="modal-add-priority-dropdown"
                 :selectedTodoPriority="input.priority"
                 :inputMode="inputMode"
                 @get-priority="getPriority"
@@ -59,11 +57,10 @@
             </div>
           </div>
           <div
-            data-cy="todo-input-dialog-footer"
+            data-cy="modal-add-save-button"
             class="flex justify-end pt-12 submit-button"
           >
             <button
-              data-cy="modal-add-save-button"
               :disabled="input.title === ''"
               class="px-6 py-2 text-white rounded-full"
               style="background: #16abf8"

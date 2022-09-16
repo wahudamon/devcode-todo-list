@@ -2,12 +2,14 @@
   <div class="w-full h-full p-4 rounded-xl todo-item-card">
     <div class="flex justify-between todo-item-card_body">
       <div class="flex gap-4">
-        <input
-          v-model="todoCheckbox"
-          data-cy="todo-item-checkbox"
-          class="cursor-pointer"
-          type="checkbox"
-        />
+        <div data-cy="todo-item-checkbox">
+          <input
+            v-model="todoCheckbox"
+            data-cy="todo-item-checkbox"
+            class="cursor-pointer"
+            type="checkbox"
+          />
+        </div>
         <div data-cy="todo-item-priority-indicator">
           <div
             class="mt-2 w-2 h-2 rounded-full"
@@ -45,12 +47,11 @@
           @click="toggleInputDialog(true)"
         ></div>
       </div>
-      <button
-        data-cy="todo-item-delete-button"
-        @click="toggleConfirmDialog(true)"
-      >
-        <span class="icon-delete-activity-item"></span>
-      </button>
+      <div data-cy="todo-item-delete-button">
+        <button @click="toggleConfirmDialog(true)">
+          <span class="icon-delete-activity-item"></span>
+        </button>
+      </div>
     </div>
   </div>
 </template>

@@ -27,7 +27,7 @@
         <empty-state-image v-else pageName="home" />
       </div>
     </div>
-    <confirm-dialog />
+    <confirm-dialog data-cy="modal-delete" />
     <notification-dialog data-cy="modal-information" />
   </div>
 </template>
