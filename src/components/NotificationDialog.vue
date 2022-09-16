@@ -2,12 +2,18 @@
   <div class="container mx-auto">
     <div class="flex justify-center">
       <div
-        v-show="isOpen"
-        class="absolute inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50"
+        v-show="isShow"
+        class="absolute inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50 z-50"
       >
-        <div class="w-3/5 h-3/5 p-6 bg-white rounded-md shadow-xl">
-          <div class="flex items-center justify-between">
-            <h3 class="text-2xl">Activity berhasil dihapus</h3>
+        <div class="w-2/5 h-16 p-6 bg-white rounded-xl shadow-xl">
+          <div class="flex gap-2">
+            <span
+              data-cy="modal-information-icon"
+              class="ml-1 icon_info"
+            ></span>
+            <p data-cy="modal-information-text" class="text-md">
+              Activity berhasil dihapus!
+            </p>
           </div>
         </div>
       </div>
@@ -15,20 +21,31 @@
   </div>
 </template>
 <script>
+import store from "@/store";
+import { mapGetters } from "vuex";
+
 export default {
   name: "NotificationDialog",
-  props: {
-    showDialog: Boolean,
-  },
   data() {
     return {
-      isOpen: false,
+      isShow: false,
     };
   },
+  computed: mapGetters({
+    showNotificationDialog: "showNotificationDialog",
+  }),
   watch: {
-    showDialog(val) {
-      this.isOpen = val;
+    showNotificationDialog(val) {
+      this.isShow = val;
+    },
+  },
+  methods: {
+    toggleDialog(value) {
+      store.dispatch("toggleNotificationDialog", { value });
     },
   },
 };
 </script>
+<style lang="scss">
+@import "@/assets/icons/icons";
+</style>
