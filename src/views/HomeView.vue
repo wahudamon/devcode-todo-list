@@ -31,43 +31,37 @@ import AddButton from "@/components/AddButton.vue";
 import EmptyStateImage from "@/components/EmptyStateImage.vue";
 import ActivityCard from "@/components/ActivityCard.vue";
 
-import axios from "axios";
+import store from "@/store";
+import { mapGetters } from "vuex";
 
 export default {
   name: "HomeView",
+
   components: { AddButton, EmptyStateImage, ActivityCard },
-  data() {
-    return {
-      baseUrl: "https://todo.api.devcode.gethired.id",
-      userEmail: "dururu@gmail.com",
-      activityData: {},
-    };
-  },
+
+  computed: mapGetters({
+    activityData: "activityData",
+  }),
+
   mounted() {
     this.loadActivity();
   },
+
   methods: {
     async loadActivity() {
       try {
-        let response = await axios.get(`${this.baseUrl}/activity-groups`, {
-          params: {
-            email: this.userEmail,
-          },
-        });
-
-        this.activityData = response.data;
+        await store.dispatch("getActivity");
       } catch (err) {
         console.log(err);
       }
     },
     async addNewActivity() {
       try {
-        let response = await axios.post(`${this.baseUrl}/activity-groups`, {
+        await store.dispatch("addNewActivity", {
           title: "New Activity",
-          email: "dururu@gmail.com",
         });
 
-        return response;
+        this.loadActivity();
       } catch (err) {
         console.log(err);
       }
