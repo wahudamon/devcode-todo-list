@@ -1,6 +1,8 @@
 <template>
   <div data-cy="navbar" class="w-full h-1/5 py-8 navbar">
-    <h3 class="ml-32 text-2xl text-white navbar__brand">TO DO LIST APP</h3>
+    <h3 data-cy="header-title" class="ml-32 text-2xl text-white navbar__brand">
+      TO DO LIST APP
+    </h3>
   </div>
 </template>
 

@@ -5,7 +5,7 @@
       :inputMode="inputMode"
       :selectedTodo="selectedTodo"
     />
-    <confirm-dialog data-cy="todo-delete-confirm-dialog" />
+    <confirm-dialog data-cy="modal-delete" />
     <div class="mt-10 mx-56">
       <div class="flex justify-between">
         <div class="flex gap-4">
