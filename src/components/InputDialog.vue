@@ -2,7 +2,7 @@
   <div class="container mx-auto">
     <div class="flex justify-center">
       <div
-        v-show="isShow"
+        v-if="isShow"
         class="absolute inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50 z-50"
       >
         <div class="w-2/5 h-2/5 pt-6 px-6 bg-white rounded-md shadow-xl">

@@ -2,7 +2,7 @@
   <div data-cy="todo-modal-delete" class="container mx-auto">
     <div class="flex justify-center">
       <div
-        v-show="isShow"
+        v-if="isShow"
         class="absolute inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50"
       >
         <div class="w-2/5 h-2/5 p-6 bg-white rounded-xl shadow-xl">
