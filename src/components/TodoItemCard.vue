@@ -63,10 +63,13 @@
         <div
           data-cy="todo-item-edit-button"
           class="cursor-pointer icon-edit-todo-item"
-          @click="updateTodoItem"
+          @click="toggleInputDialog(true)"
         ></div>
       </div>
-      <button data-cy="todo-item-delete-button" @click="toggleConfirmDialog">
+      <button
+        data-cy="todo-item-delete-button"
+        @click="toggleConfirmDialog(true)"
+      >
         <span class="icon-delete-activity-item"></span>
       </button>
     </div>
@@ -99,6 +102,19 @@ export default {
         title: this.todoItem.title,
       });
       store.dispatch("toggleConfirmDialog", { value });
+    },
+    toggleInputDialog(value) {
+      this.detailTodoItem();
+      store.dispatch("toggleInputDialog", { value });
+    },
+    async detailTodoItem() {
+      try {
+        await store.dispatch("detailTodo", {
+          id: this.todoItem.id,
+        });
+      } catch (err) {
+        console.log(err);
+      }
     },
     async updateTodoItem() {
       try {

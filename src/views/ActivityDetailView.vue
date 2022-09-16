@@ -68,6 +68,7 @@ import InputDialog from "@/components/InputDialog.vue";
 import ConfirmDialog from "@/components/ConfirmDialog.vue";
 
 import store from "@/store";
+import { mapGetters } from "vuex";
 
 export default {
   name: "ActivityDetailView",
@@ -88,6 +89,10 @@ export default {
       showDialog: false,
     };
   },
+
+  computed: mapGetters({
+    selectedTodo: "selectedTodo",
+  }),
 
   mounted() {
     this.loadDetailActivity();
