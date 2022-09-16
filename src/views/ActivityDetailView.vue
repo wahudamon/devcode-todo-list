@@ -2,6 +2,7 @@
   <div class="activity-detail">
     <input-dialog
       data-cy="todo-item-input-dialog"
+      :inputMode="inputMode"
       :selectedTodo="selectedTodo"
     />
     <confirm-dialog data-cy="todo-delete-confirm-dialog" />
@@ -72,6 +73,7 @@ import InputDialog from "@/components/InputDialog.vue";
 import ConfirmDialog from "@/components/ConfirmDialog.vue";
 
 import store from "@/store";
+import { mapGetters } from "vuex";
 
 export default {
   name: "ActivityDetailView",
@@ -94,12 +96,19 @@ export default {
     };
   },
 
+  computed: mapGetters({
+    inputMode: "inputMode",
+  }),
+
   mounted() {
     this.loadDetailActivity();
   },
 
   methods: {
     toggleInputDialog(value) {
+      store.dispatch("setInputMode", {
+        data: "add",
+      });
       store.dispatch("toggleInputDialog", { value });
     },
     resetSelectedTodo() {

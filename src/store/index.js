@@ -12,6 +12,7 @@ export default createStore({
       id: "",
       title: "",
     },
+    inputMode: "add",
     showInputDialog: false,
     showConfirmDialog: false,
   },
@@ -21,6 +22,9 @@ export default createStore({
     },
     selectedItem(state) {
       return state.selectedItem;
+    },
+    inputMode(state) {
+      return state.inputMode;
     },
     showInputDialog(state) {
       return state.showInputDialog;
@@ -37,6 +41,9 @@ export default createStore({
       state.selectedItem.type = type;
       state.selectedItem.id = id;
       state.selectedItem.title = title;
+    },
+    SET_INPUT_MODE(state, { data }) {
+      state.inputMode = data;
     },
     TOGGLE_INPUT_DIALOG(state, { value }) {
       state.showInputDialog = value;
@@ -159,6 +166,9 @@ export default createStore({
     },
     setSelectedItem({ commit }, { type, id, title }) {
       commit("SET_SELECTED_ITEM", { type, id, title });
+    },
+    setInputMode({ commit }, { data }) {
+      commit("SET_INPUT_MODE", { data });
     },
     toggleInputDialog({ commit }, { value }) {
       commit("TOGGLE_INPUT_DIALOG", { value });

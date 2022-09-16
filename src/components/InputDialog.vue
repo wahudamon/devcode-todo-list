@@ -11,7 +11,7 @@
             class="flex items-center justify-between"
           >
             <h3 data-cy="todo-input-dialog-title" class="text-2xl">
-              Tambah List Item
+              {{ inputMode === "edit" ? "Edit Item" : "Tambah List Item" }}
             </h3>
             <svg
               data-cy="todo-input-dialog-close-button"
@@ -85,6 +85,7 @@ export default {
   name: "InputDialog",
   components: { PriorityCombobox },
   props: {
+    inputMode: String,
     selectedTodo: Object,
   },
   data() {

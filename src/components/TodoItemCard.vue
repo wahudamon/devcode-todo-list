@@ -92,6 +92,9 @@ export default {
     },
     toggleInputDialog(value) {
       this.$emit("get-todo-detail", this.todoItem.id);
+      store.dispatch("setInputMode", {
+        data: "edit",
+      });
       store.dispatch("toggleInputDialog", { value });
     },
     async detailTodoItem() {
