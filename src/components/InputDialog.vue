@@ -3,7 +3,7 @@
     <div class="flex justify-center">
       <div
         v-show="isShow"
-        class="absolute inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50"
+        class="absolute inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50 z-50"
       >
         <div class="w-3/5 h-3/5 p-6 bg-white rounded-md shadow-xl">
           <div class="flex items-center justify-between">
@@ -67,3 +67,8 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+.container {
+  z-index: 99 !important;
+}
+</style>
