@@ -12,9 +12,10 @@ export default createStore({
       id: "",
       title: "",
     },
-    selectedTodo: {},
+    inputMode: "add",
     showInputDialog: false,
     showConfirmDialog: false,
+    showNotificationDialog: false,
   },
   getters: {
     activityData(state) {
@@ -23,14 +24,17 @@ export default createStore({
     selectedItem(state) {
       return state.selectedItem;
     },
-    selectedTodo(state) {
-      return state.selectedTodo;
+    inputMode(state) {
+      return state.inputMode;
     },
     showInputDialog(state) {
       return state.showInputDialog;
     },
     showConfirmDialog(state) {
       return state.showConfirmDialog;
+    },
+    showNotificationDialog(state) {
+      return state.showNotificationDialog;
     },
   },
   mutations: {
@@ -42,14 +46,17 @@ export default createStore({
       state.selectedItem.id = id;
       state.selectedItem.title = title;
     },
-    SET_SELECTED_TODO(state, data) {
-      state.selectedTodo = data;
+    SET_INPUT_MODE(state, { data }) {
+      state.inputMode = data;
     },
     TOGGLE_INPUT_DIALOG(state, { value }) {
       state.showInputDialog = value;
     },
     TOGGLE_CONFIRM_DIALOG(state, { value }) {
       state.showConfirmDialog = value;
+    },
+    TOGGLE_NOTIFICATION_DIALOG(state, { value }) {
+      state.showNotificationDialog = value;
     },
   },
   actions: {
@@ -128,11 +135,9 @@ export default createStore({
         console.log(err);
       }
     },
-    async detailTodo({ commit }, payload) {
+    async detailTodo(context, payload) {
       try {
         let response = await axios.get(`${baseUrl}/todo-items/${payload.id}`);
-
-        commit("SET_SELECTED_TODO", response.data);
 
         return response.data;
       } catch (err) {
@@ -169,11 +174,17 @@ export default createStore({
     setSelectedItem({ commit }, { type, id, title }) {
       commit("SET_SELECTED_ITEM", { type, id, title });
     },
+    setInputMode({ commit }, { data }) {
+      commit("SET_INPUT_MODE", { data });
+    },
     toggleInputDialog({ commit }, { value }) {
       commit("TOGGLE_INPUT_DIALOG", { value });
     },
     toggleConfirmDialog({ commit }, { value }) {
       commit("TOGGLE_CONFIRM_DIALOG", { value });
+    },
+    toggleNotificationDialog({ commit }, { value }) {
+      commit("TOGGLE_NOTIFICATION_DIALOG", { value });
     },
   },
   modules: {},

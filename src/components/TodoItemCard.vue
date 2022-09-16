@@ -10,35 +10,14 @@
         />
         <div data-cy="todo-item-priority-indicator">
           <div
-            v-if="todoItem.priority === 'very-high'"
             class="mt-2 w-2 h-2 rounded-full"
-            style="background: #ed4c5c"
-          ></div>
-          <div
-            v-else-if="todoItem.priority === 'high'"
-            class="mt-2 w-2 h-2 rounded-full"
-            style="background: #ffce31"
-          ></div>
-          <div
-            v-else-if="todoItem.priority === 'normal'"
-            class="mt-2 w-2 h-2 rounded-full"
-            style="background: #00a790"
-          ></div>
-          <div
-            v-else-if="todoItem.priority === 'low'"
-            class="mt-2 w-2 h-2 rounded-full"
-            style="background: #43c4e3"
-          ></div>
-          <div
-            v-else-if="todoItem.priority === 'very-low'"
-            class="mt-2 w-2 h-2 rounded-full"
-            style="background: #b01aff"
+            :style="{ background: priorityColor[todoItem.priority] }"
           ></div>
         </div>
         <div>
           <p
             v-if="todoItem.is_active === 1"
-            data-cy="todo-item-card-title"
+            data-cy="todo-title"
             class="text-md font-normal"
           >
             {{
@@ -49,7 +28,7 @@
           </p>
           <p
             v-else-if="todoItem.is_active === 0"
-            data-cy="todo-item-card-title"
+            data-cy="todo-title"
             class="text-md font-normal line-through"
             style="color: #888888"
           >
@@ -86,12 +65,20 @@ export default {
   },
   data() {
     return {
-      todoCheckbox: false,
+      selectedTodoData: {},
+      todoCheckbox: this.todoItem.is_active === 1 ? false : true,
+      priorityColor: {
+        "very-high": "#ed4c5c",
+        high: "#ffce31",
+        normal: "#00a790",
+        low: "#43c4e3",
+        "very-low": "#b01aff",
+      },
     };
   },
   watch: {
     todoCheckbox() {
-      this.updateTodoItem();
+      this.updateTodoItemStatus();
     },
   },
   methods: {
@@ -104,24 +91,25 @@ export default {
       store.dispatch("toggleConfirmDialog", { value });
     },
     toggleInputDialog(value) {
-      this.detailTodoItem();
+      this.$emit("get-todo-detail", this.todoItem.id);
+      store.dispatch("setInputMode", {
+        data: "edit",
+      });
       store.dispatch("toggleInputDialog", { value });
     },
     async detailTodoItem() {
       try {
-        await store.dispatch("detailTodo", {
+        this.selectedTodoData = await store.dispatch("newDetailTodo", {
           id: this.todoItem.id,
         });
       } catch (err) {
         console.log(err);
       }
     },
-    async updateTodoItem() {
+    async updateTodoItemStatus() {
       try {
         await store.dispatch("updateTodoItem", {
           id: this.todoItem.id,
-          title: "Abis diubah",
-          priority: "low",
           is_active: this.todoCheckbox ? 0 : 1,
         });
         this.$parent.loadDetailActivity();

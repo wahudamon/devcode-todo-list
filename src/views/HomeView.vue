@@ -1,10 +1,14 @@
 <template>
   <div class="home">
     <confirm-dialog data-cy="activity-delete-confirm-dialog" />
+    <notification-dialog data-cy="modal-information" />
     <div class="mt-10 mx-56">
       <div class="flex justify-between">
-        <h2 data-cy="activity-title" class="text-4xl font-bold">Activity</h2>
-        <add-button :clickEvent="addNewActivity" />
+        <h2 data-cy="header-title" class="text-4xl font-bold">Activity</h2>
+        <add-button
+          data-cy="activity-add-button"
+          :clickEvent="addNewActivity"
+        />
       </div>
       <div class="mt-8">
         <div
@@ -19,6 +23,7 @@
             :title="activity.title"
             :date="activity.created_at"
             :getActivity="loadActivity"
+            data-cy="activity-item"
           />
         </div>
         <empty-state-image v-else pageName="home" />
@@ -33,6 +38,7 @@ import AddButton from "@/components/AddButton.vue";
 import EmptyStateImage from "@/components/EmptyStateImage.vue";
 import ActivityCard from "@/components/ActivityCard.vue";
 import ConfirmDialog from "@/components/ConfirmDialog.vue";
+import NotificationDialog from "@/components/NotificationDialog.vue";
 
 import store from "@/store";
 import { mapGetters } from "vuex";
@@ -40,7 +46,13 @@ import { mapGetters } from "vuex";
 export default {
   name: "HomeView",
 
-  components: { AddButton, EmptyStateImage, ActivityCard, ConfirmDialog },
+  components: {
+    AddButton,
+    EmptyStateImage,
+    ActivityCard,
+    ConfirmDialog,
+    NotificationDialog,
+  },
 
   computed: mapGetters({
     activityData: "activityData",

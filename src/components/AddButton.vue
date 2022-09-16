@@ -1,6 +1,5 @@
 <template>
   <button
-    data-cy="add-activity-button"
     class="px-8 py-3 rounded-3xl text-white text-lg font-medium add-button"
     @click="clickEvent"
   >

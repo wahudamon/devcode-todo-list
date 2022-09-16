@@ -11,7 +11,7 @@
             class="flex items-center justify-between"
           >
             <h3 data-cy="todo-input-dialog-title" class="text-2xl">
-              Tambah List Item
+              {{ inputMode === "edit" ? "Edit Item" : "Tambah List Item" }}
             </h3>
             <svg
               data-cy="todo-input-dialog-close-button"
@@ -38,9 +38,9 @@
             </div>
             <div>
               <input
-                data-cy="todo-input-title-box"
+                data-cy="modal-add-name-input"
                 v-model="input.title"
-                class="h-4/5 w-3/5 p-1 bg-inherit border-2 border-gray-700 rounded-md text-md focus:outline-none"
+                class="h-4/5 w-3/5 p-1 bg-inherit border border-gray-700 rounded-md text-md focus:outline-none"
                 type="text"
               />
             </div>
@@ -50,21 +50,24 @@
               >
             </div>
             <div>
-              <input
-                data-cy="todo-input-priority-box"
-                v-model="input.title"
-                class="h-4/5 w-3/5 p-1 bg-inherit border-2 border-gray-700 rounded-md text-md focus:outline-none"
-                type="text"
+              <priority-combobox
+                data-cy="modal-add-priority-dropdown"
+                :selectedTodoPriority="input.priority"
+                :inputMode="inputMode"
+                @get-priority="getPriority"
               />
             </div>
           </div>
-          <div data-cy="todo-input-dialog-footer" class="flex justify-end mt-4">
+          <div
+            data-cy="todo-input-dialog-footer"
+            class="flex justify-end pt-12 submit-button"
+          >
             <button
-              data-cy="todo-item-submit-button"
+              data-cy="modal-add-save-button"
               :disabled="input.title === ''"
               class="px-6 py-2 text-white rounded-full"
               style="background: #16abf8"
-              @click="addNewTodoItem"
+              @click="onClickSubmit"
             >
               Simpan
             </button>
@@ -78,14 +81,21 @@
 import { mapGetters } from "vuex";
 import store from "@/store";
 
+import PriorityCombobox from "@/components/PriorityCombobox.vue";
+
 export default {
   name: "InputDialog",
+  components: { PriorityCombobox },
+  props: {
+    inputMode: String,
+    selectedTodo: Object,
+  },
   data() {
     return {
       isShow: false,
       input: {
         title: "",
-        priority: "low",
+        priority: "",
       },
     };
   },
@@ -96,23 +106,58 @@ export default {
     showInputDialog(val) {
       this.isShow = val;
     },
+    selectedTodo(val) {
+      this.input.title = val.title;
+      this.input.priority = val.priority;
+    },
   },
   methods: {
     toggleDialog(value) {
+      this.$parent.resetSelectedTodo();
       store.dispatch("toggleInputDialog", { value });
+    },
+    getPriority(value) {
+      this.input.priority = value;
+    },
+    onClickSubmit() {
+      if (this.inputMode === "edit") {
+        this.updateTodoItem();
+      } else {
+        this.addNewTodoItem();
+      }
     },
     async addNewTodoItem() {
       try {
         await store.dispatch("addNewTodoItem", {
           activity_group_id: this.$route.params.id,
-          title: "Boleh juga",
-          priority: "high",
+          title: this.input.title,
+          priority: this.input.priority,
         });
         this.toggleDialog(false);
         this.$parent.loadDetailActivity();
       } catch (err) {
         console.log(err);
       }
+
+      this.input.title = "";
+      this.input.priority = "";
+    },
+    async updateTodoItem() {
+      try {
+        await store.dispatch("updateTodoItem", {
+          id: this.selectedTodo.id,
+          title: this.input.title,
+          priority: this.input.priority,
+        });
+
+        this.toggleDialog(false);
+        this.$parent.loadDetailActivity();
+      } catch (err) {
+        console.log(err);
+      }
+
+      this.input.title = "";
+      this.input.priority = "";
     },
   },
 };

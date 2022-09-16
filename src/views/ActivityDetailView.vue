@@ -1,6 +1,10 @@
 <template>
   <div class="activity-detail">
-    <input-dialog data-cy="todo-item-input-dialog" />
+    <input-dialog
+      data-cy="todo-item-input-dialog"
+      :inputMode="inputMode"
+      :selectedTodo="selectedTodo"
+    />
     <confirm-dialog data-cy="todo-delete-confirm-dialog" />
     <div class="mt-10 mx-56">
       <div class="flex justify-between">
@@ -36,7 +40,7 @@
             <span class="icon-sort"></span>
           </button>
           <add-button
-            data-cy="new-todo-item-button"
+            data-cy="todo-add-button"
             :clickEvent="toggleInputDialog"
           />
         </div>
@@ -49,9 +53,10 @@
         >
           <todo-item-card
             v-for="todoItem in activityDetailData.todo_items"
-            data-cy="todo-item-card"
+            data-cy="todo-item"
             :key="todoItem.id"
             :todoItem="todoItem"
+            @get-todo-detail="detailTodoItem"
           />
         </div>
         <empty-state-image v-else pageName="activity-detail" />
@@ -83,6 +88,7 @@ export default {
 
   data() {
     return {
+      selectedTodo: {},
       activityDetailData: {},
       showInputText: false,
       inputTextValue: "",
@@ -91,7 +97,7 @@ export default {
   },
 
   computed: mapGetters({
-    selectedTodo: "selectedTodo",
+    inputMode: "inputMode",
   }),
 
   mounted() {
@@ -100,12 +106,27 @@ export default {
 
   methods: {
     toggleInputDialog(value) {
+      store.dispatch("setInputMode", {
+        data: "add",
+      });
       store.dispatch("toggleInputDialog", { value });
+    },
+    resetSelectedTodo() {
+      this.selectedTodo = {};
     },
     async loadDetailActivity() {
       try {
         this.activityDetailData = await store.dispatch("detailActivity", {
           id: this.$route.params.id,
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async detailTodoItem(id) {
+      try {
+        this.selectedTodo = await store.dispatch("detailTodo", {
+          id,
         });
       } catch (err) {
         console.log(err);
