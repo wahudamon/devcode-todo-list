@@ -66,7 +66,7 @@ export default {
   data() {
     return {
       selectedTodoData: {},
-      todoCheckbox: false,
+      todoCheckbox: this.todoItem.is_active === 1 ? false : true,
       priorityColor: {
         "very-high": "#ed4c5c",
         high: "#ffce31",
