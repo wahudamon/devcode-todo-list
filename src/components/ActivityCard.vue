@@ -1,19 +1,18 @@
 <template>
-  <div
-    data-cy="activity-card"
-    class="w-1/5 h-1/5 p-4 rounded-xl cursor-pointer activity-card"
-    @click="$router.push('/detail')"
-  >
-    <div class="pb-28 activity-card_body">
+  <div data-cy="activity-card" class="w-1/5 h-1/5 p-4 rounded-xl activity-card">
+    <div
+      class="pb-28 cursor-pointer activity-card_body"
+      @click="$router.push(`/detail/${id}`)"
+    >
       <p data-cy="activity-card-title" class="text-md font-bold">
-        Daftar Belanja Bulanan Saya dan Anak
+        {{ title?.length > 16 ? `${title.slice(0, 16)}...` : title }}
       </p>
     </div>
     <div class="flex justify-between activity-card_footer">
       <p data-cy="activity-card-date" class="mt-1 text-sm font-light">
-        14 September 2022
+        {{ formattedDate(date) }}
       </p>
-      <button data-cy="activity-card-delete-button">
+      <button data-cy="activity-card-delete-button" @click="removeActivity(id)">
         <span class="icon-delete-activity-item"></span>
       </button>
     </div>
@@ -21,8 +20,36 @@
 </template>
 
 <script>
+import moment from "moment";
+import store from "@/store";
+
 export default {
   name: "ActivityCard",
+  props: {
+    id: String,
+    title: String,
+    date: String,
+    getActivity: Function,
+  },
+  data() {
+    return {
+      baseUrl: "https://todo.api.devcode.gethired.id",
+      userEmail: "dururu@gmail.com",
+    };
+  },
+  methods: {
+    formattedDate(value) {
+      return moment(value).locale("id").format("DD MMMM YYYY");
+    },
+    async removeActivity(id) {
+      try {
+        await store.dispatch("removeActivity", { id });
+        this.getActivity();
+      } catch (err) {
+        console.log(err);
+      }
+    },
+  },
 };
 </script>
 
