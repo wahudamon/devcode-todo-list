@@ -15,6 +15,7 @@ export default createStore({
     inputMode: "add",
     showInputDialog: false,
     showConfirmDialog: false,
+    showNotificationDialog: false,
   },
   getters: {
     activityData(state) {
@@ -31,6 +32,9 @@ export default createStore({
     },
     showConfirmDialog(state) {
       return state.showConfirmDialog;
+    },
+    showNotificationDialog(state) {
+      return state.showNotificationDialog;
     },
   },
   mutations: {
@@ -50,6 +54,9 @@ export default createStore({
     },
     TOGGLE_CONFIRM_DIALOG(state, { value }) {
       state.showConfirmDialog = value;
+    },
+    TOGGLE_NOTIFICATION_DIALOG(state, { value }) {
+      state.showNotificationDialog = value;
     },
   },
   actions: {
@@ -175,6 +182,9 @@ export default createStore({
     },
     toggleConfirmDialog({ commit }, { value }) {
       commit("TOGGLE_CONFIRM_DIALOG", { value });
+    },
+    toggleNotificationDialog({ commit }, { value }) {
+      commit("TOGGLE_NOTIFICATION_DIALOG", { value });
     },
   },
   modules: {},
