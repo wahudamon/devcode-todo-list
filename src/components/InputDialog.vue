@@ -58,7 +58,10 @@
               />
             </div>
           </div>
-          <div data-cy="todo-input-dialog-footer" class="flex justify-end mt-4">
+          <div
+            data-cy="todo-input-dialog-footer"
+            class="flex justify-end pt-12"
+          >
             <button
               data-cy="todo-item-submit-button"
               :disabled="input.title === ''"
