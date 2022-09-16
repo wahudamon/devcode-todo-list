@@ -67,11 +67,11 @@ export default {
     return {
       todoCheckbox: false,
       priorityColor: {
-        very_high: "#ed4c5c",
+        "very-high": "#ed4c5c",
         high: "#ffce31",
         normal: "#00a790",
         low: "#43c4e3",
-        very_low: "#b01aff",
+        "very-low": "#b01aff",
       },
     };
   },

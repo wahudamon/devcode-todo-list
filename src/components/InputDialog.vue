@@ -50,13 +50,7 @@
               >
             </div>
             <div>
-              <priority-combobox />
-              <!-- <input
-                data-cy="todo-input-priority-box"
-                v-model="input.title"
-                class="h-4/5 w-3/5 p-1 bg-inherit border-2 border-gray-700 rounded-md text-md focus:outline-none"
-                type="text"
-              /> -->
+              <priority-combobox @get-priority="getPriority" />
             </div>
           </div>
           <div
@@ -92,7 +86,7 @@ export default {
       isShow: false,
       input: {
         title: "",
-        priority: "low",
+        priority: "",
       },
     };
   },
@@ -108,18 +102,24 @@ export default {
     toggleDialog(value) {
       store.dispatch("toggleInputDialog", { value });
     },
+    getPriority(value) {
+      this.input.priority = value;
+    },
     async addNewTodoItem() {
       try {
         await store.dispatch("addNewTodoItem", {
           activity_group_id: this.$route.params.id,
-          title: "Boleh juga",
-          priority: "high",
+          title: this.input.title,
+          priority: this.input.priority,
         });
         this.toggleDialog(false);
         this.$parent.loadDetailActivity();
       } catch (err) {
         console.log(err);
       }
+
+      this.input.title = "";
+      this.input.priority = "";
     },
   },
 };

@@ -41,7 +41,7 @@
           class="absolute left-0 right-0 mb-4 bg-white divide-y rounded-lg shadow-lg overflow-hidden"
         >
           <li
-            v-for="(option, index) in newOptions"
+            v-for="(option, index) in options"
             :key="index"
             class="px-3 py-2 flex gap-2 transition-colors duration-300 hover:bg-gray-200"
             @mousedown.prevent="setOption(option)"
@@ -65,15 +65,22 @@ export default {
     return {
       isOptionsExpanded: false,
       selectedOption: { color: "#00a790", title: "Normal", value: "normal" },
-      options: ["Very High", "High", "Normal", "Low", "Very Low"],
-      newOptions: [
-        { color: "#ed4c5c", title: "Very High", value: "very_high" },
+      options: [
+        { color: "#ed4c5c", title: "Very High", value: "very-high" },
         { color: "#ffce31", title: "High", value: "high" },
         { color: "#00a790", title: "Normal", value: "normal" },
         { color: "#43c4e3", title: "Low", value: "low" },
-        { color: "#b01aff", title: "Very Low", value: "very_low" },
+        { color: "#b01aff", title: "Very Low", value: "very-low" },
       ],
     };
+  },
+  watch: {
+    selectedOption(val) {
+      this.$emit("get-priority", val.value);
+    },
+  },
+  mounted() {
+    this.$emit("get-priority", this.selectedOption.value);
   },
   methods: {
     setOption(option) {
