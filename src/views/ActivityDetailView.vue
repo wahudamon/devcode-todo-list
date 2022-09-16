@@ -43,8 +43,11 @@
           v-if="activityDetailData.todo_items?.length !== 0"
           class="flex flex-col flex-wrap gap-4 justify-center"
         >
-          <todo-item-card />
-          <todo-item-card />
+          <todo-item-card
+            v-for="todoItem in activityDetailData.todo_items"
+            :key="todoItem.id"
+            :todoItem="todoItem"
+          />
         </div>
         <empty-state-image v-else pageName="activity-detail" />
       </div>
@@ -67,8 +70,6 @@ export default {
 
   data() {
     return {
-      baseUrl: "https://todo.api.devcode.gethired.id",
-      userEmail: "dururu@gmail.com",
       activityDetailData: {},
       showInputText: false,
       inputTextValue: "",

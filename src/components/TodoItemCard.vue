@@ -11,12 +11,39 @@
           type="checkbox"
           value="completed"
         />
-        <div
-          data-cy="todo-item-priority-indicator"
-          class="mt-2 w-2 h-2 rounded-full bg-red-600"
-        ></div>
+        <div data-cy="todo-item-priority-indicator">
+          <div
+            v-if="todoItem.priority === 'very-high'"
+            class="mt-2 w-2 h-2 rounded-full"
+            style="background: #ed4c5c"
+          ></div>
+          <div
+            v-else-if="todoItem.priority === 'high'"
+            class="mt-2 w-2 h-2 rounded-full"
+            style="background: #ffce31"
+          ></div>
+          <div
+            v-else-if="todoItem.priority === 'normal'"
+            class="mt-2 w-2 h-2 rounded-full"
+            style="background: #00a790"
+          ></div>
+          <div
+            v-else-if="todoItem.priority === 'low'"
+            class="mt-2 w-2 h-2 rounded-full"
+            style="background: #43c4e3"
+          ></div>
+          <div
+            v-else-if="todoItem.priority === 'very-low'"
+            class="mt-2 w-2 h-2 rounded-full"
+            style="background: #b01aff"
+          ></div>
+        </div>
         <p data-cy="todo-item-card-title" class="text-md font-normal">
-          Minyak Goreng Cap Bimoli
+          {{
+            todoItem.title?.length > 40
+              ? `${todoItem.title.slice(0, 40)}...`
+              : todoItem.title
+          }}
         </p>
         <div data-cy="todo-item-edit-button" class="icon-edit-todo-item"></div>
       </div>
@@ -30,6 +57,21 @@
 <script>
 export default {
   name: "TodoItemCard",
+  props: {
+    todoItem: Object,
+  },
+  data() {
+    return {
+      priorityColors: {
+        very_high: "#ED4C5C",
+        high: "#FFCE31",
+        normal: "#00A790",
+        low: "#43C4E3",
+        very_low: "#B01AFF",
+      },
+    };
+  },
+  watch: {},
 };
 </script>
 

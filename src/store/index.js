@@ -7,22 +7,22 @@ const userEmail = "dururu@gmail.com";
 export default createStore({
   state: {
     activityData: {},
-    inputActivityDialog: false,
+    inputDialog: false,
   },
   getters: {
     activityData(state) {
       return state.activityData;
     },
     inputActivityDialog(state) {
-      return state.inputActivityDialog;
+      return state.inputDialog;
     },
   },
   mutations: {
     GET_ACTIVITY_DATA(state, { data }) {
       state.activityData = data;
     },
-    TOGGLE_ACTIVITY_DIALOG(state) {
-      state.inputActivityDialog = !state.inputActivityDialog;
+    TOGGLE_INPUT_DIALOG(state) {
+      state.inputDialog = !state.inputDialog;
     },
   },
   actions: {
@@ -61,6 +61,8 @@ export default createStore({
           `${baseUrl}/activity-groups/${payload.id}`
         );
 
+        console.log(response.data);
+
         return response.data;
       } catch (err) {
         console.log(err);
@@ -91,7 +93,7 @@ export default createStore({
         console.log(err);
       }
     },
-    toggleActivityDialog({ commit }) {
+    toggleInputDialog({ commit }) {
       commit("TOGGLE_ACTIVITY_DIALOG");
     },
   },
