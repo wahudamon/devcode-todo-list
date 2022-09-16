@@ -6,42 +6,28 @@
         class="absolute inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50 z-50"
       >
         <div class="w-2/5 h-2/5 p-6 bg-white rounded-xl shadow-xl">
-          <div class="flex items-center justify-between">
-            <h3 class="text-2xl">Tambah List Item</h3>
-            <svg
-              @click="toggleDialog(false)"
-              xmlns="http://www.w3.org/2000/svg"
-              class="w-8 h-8 text-red-900 cursor-pointer"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
+          <div class="flex items-center justify-center">
+            <span data-cy="confirm-dialog-icon" class="icon-danger-md"></span>
           </div>
           <div class="mt-4 text-center">
-            <p class="mb-4 text-sm">
-              Apakah anda yakin menghapus activity "Insert activity name”?
+            <p data-cy="confirm-dialog-text" class="mb-4 text-lg">
+              Apakah anda yakin menghapus activity <br />
+              <span class="font-bold">"Insert activity name”</span>?
             </p>
             <div class="flex justify-center gap-4">
               <button
                 data-cy="confirm-dialog-cancel-button"
-                class="px-6 py-2 text-blue-800 border border-blue-600 rounded"
+                class="px-6 py-2 rounded-full btn-cancel"
                 @click="toggleDialog(false)"
               >
                 Batal
               </button>
               <button
                 data-cy="confirm-dialog-confirm-button"
-                class="px-6 py-2 text-blue-800 border border-blue-600 rounded"
+                class="px-6 py-2 rounded-full btn-confirm"
                 @click="toggleDialog(false)"
               >
-                Simpan
+                Hapus
               </button>
             </div>
           </div>
@@ -76,3 +62,17 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+@import "@/assets/icons/icons";
+
+.btn {
+  &-cancel {
+    background: #f4f4f4;
+    color: #4a4a4a;
+  }
+  &-confirm {
+    background: #ed4c5c;
+    color: #ffffff;
+  }
+}
+</style>
