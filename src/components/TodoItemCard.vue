@@ -10,29 +10,8 @@
         />
         <div data-cy="todo-item-priority-indicator">
           <div
-            v-if="todoItem.priority === 'very-high'"
             class="mt-2 w-2 h-2 rounded-full"
-            style="background: #ed4c5c"
-          ></div>
-          <div
-            v-else-if="todoItem.priority === 'high'"
-            class="mt-2 w-2 h-2 rounded-full"
-            style="background: #ffce31"
-          ></div>
-          <div
-            v-else-if="todoItem.priority === 'normal'"
-            class="mt-2 w-2 h-2 rounded-full"
-            style="background: #00a790"
-          ></div>
-          <div
-            v-else-if="todoItem.priority === 'low'"
-            class="mt-2 w-2 h-2 rounded-full"
-            style="background: #43c4e3"
-          ></div>
-          <div
-            v-else-if="todoItem.priority === 'very-low'"
-            class="mt-2 w-2 h-2 rounded-full"
-            style="background: #b01aff"
+            :style="{ background: priorityColor[todoItem.priority] }"
           ></div>
         </div>
         <div>
@@ -87,6 +66,13 @@ export default {
   data() {
     return {
       todoCheckbox: false,
+      priorityColor: {
+        very_high: "#ed4c5c",
+        high: "#ffce31",
+        normal: "#00a790",
+        low: "#43c4e3",
+        very_low: "#b01aff",
+      },
     };
   },
   watch: {
