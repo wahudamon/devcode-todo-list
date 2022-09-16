@@ -72,6 +72,11 @@ export default {
 
           this.$parent.loadActivity();
           this.toggleDialog(false);
+          store.dispatch("toggleNotificationDialog", { value: true });
+          setTimeout(
+            () => store.dispatch("toggleNotificationDialog", { value: false }),
+            2000
+          );
         } catch (err) {
           console.log(err);
         }

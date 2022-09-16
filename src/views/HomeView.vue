@@ -57,7 +57,6 @@ export default {
 
   mounted() {
     this.loadActivity();
-    store.dispatch("toggleNotificationDialog", { value: true });
   },
 
   methods: {
