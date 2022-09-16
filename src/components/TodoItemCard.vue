@@ -35,13 +35,31 @@
             style="background: #b01aff"
           ></div>
         </div>
-        <p data-cy="todo-item-card-title" class="text-md font-normal">
-          {{
-            todoItem.title?.length > 40
-              ? `${todoItem.title.slice(0, 40)}...`
-              : todoItem.title
-          }}
-        </p>
+        <div>
+          <p
+            v-if="todoItem.is_active === 1"
+            data-cy="todo-item-card-title"
+            class="text-md font-normal"
+          >
+            {{
+              todoItem.title?.length > 40
+                ? `${todoItem.title.slice(0, 40)}...`
+                : todoItem.title
+            }}
+          </p>
+          <p
+            v-else-if="todoItem.is_active === 0"
+            data-cy="todo-item-card-title"
+            class="text-md font-normal line-through"
+            style="color: #888888"
+          >
+            {{
+              todoItem.title?.length > 40
+                ? `${todoItem.title.slice(0, 40)}...`
+                : todoItem.title
+            }}
+          </p>
+        </div>
         <div
           data-cy="todo-item-edit-button"
           class="cursor-pointer icon-edit-todo-item"
@@ -68,6 +86,11 @@ export default {
       todoCheckbox: false,
     };
   },
+  watch: {
+    todoCheckbox() {
+      this.updateTodoItem();
+    },
+  },
   methods: {
     async updateTodoItem() {
       try {
@@ -75,7 +98,7 @@ export default {
           id: this.todoItem.id,
           title: "Abis diubah",
           priority: "low",
-          is_active: 1,
+          is_active: this.todoCheckbox ? 0 : 1,
         });
         this.$parent.loadDetailActivity();
       } catch (err) {
