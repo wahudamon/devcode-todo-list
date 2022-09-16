@@ -8,6 +8,7 @@ export default createStore({
   state: {
     activityData: {},
     showInputDialog: false,
+    showConfirmDialog: false,
   },
   getters: {
     activityData(state) {
@@ -16,6 +17,9 @@ export default createStore({
     showInputDialog(state) {
       return state.showInputDialog;
     },
+    showConfirmDialog(state) {
+      return state.showConfirmDialog;
+    },
   },
   mutations: {
     GET_ACTIVITY_DATA(state, { data }) {
@@ -23,6 +27,9 @@ export default createStore({
     },
     TOGGLE_INPUT_DIALOG(state, { value }) {
       state.showInputDialog = value;
+    },
+    TOGGLE_CONFIRM_DIALOG(state, { value }) {
+      state.showConfirmDialog = value;
     },
   },
   actions: {
@@ -130,6 +137,9 @@ export default createStore({
     },
     toggleInputDialog({ commit }, { value }) {
       commit("TOGGLE_INPUT_DIALOG", { value });
+    },
+    toggleConfirmDialog({ commit }, { value }) {
+      commit("TOGGLE_CONFIRM_DIALOG", { value });
     },
   },
   modules: {},
