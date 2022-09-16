@@ -12,7 +12,10 @@
       <p data-cy="activity-card-date" class="mt-1 text-sm font-light">
         {{ formattedDate(date) }}
       </p>
-      <button data-cy="activity-card-delete-button" @click="removeActivity(id)">
+      <button
+        data-cy="activity-card-delete-button"
+        @click="toggleConfirmDialog"
+      >
         <span class="icon-delete-activity-item"></span>
       </button>
     </div>
@@ -35,6 +38,9 @@ export default {
     return {};
   },
   methods: {
+    toggleConfirmDialog(value) {
+      store.dispatch("toggleConfirmDialog", { value });
+    },
     formattedDate(value) {
       return moment(value).locale("id").format("DD MMMM YYYY");
     },

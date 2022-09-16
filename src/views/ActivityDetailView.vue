@@ -1,6 +1,7 @@
 <template>
   <div class="activity-detail">
     <input-dialog data-cy="todo-item-input-dialog" />
+    <confirm-dialog data-cy="todo-delete-confirm-dialog" />
     <div class="mt-10 mx-56">
       <div class="flex justify-between">
         <div class="flex gap-4">
@@ -64,13 +65,20 @@ import AddButton from "@/components/AddButton.vue";
 import EmptyStateImage from "@/components/EmptyStateImage.vue";
 import TodoItemCard from "@/components/TodoItemCard.vue";
 import InputDialog from "@/components/InputDialog.vue";
+import ConfirmDialog from "@/components/ConfirmDialog.vue";
 
 import store from "@/store";
 
 export default {
   name: "ActivityDetailView",
 
-  components: { AddButton, TodoItemCard, EmptyStateImage, InputDialog },
+  components: {
+    AddButton,
+    TodoItemCard,
+    EmptyStateImage,
+    InputDialog,
+    ConfirmDialog,
+  },
 
   data() {
     return {

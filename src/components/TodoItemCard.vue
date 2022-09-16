@@ -66,7 +66,7 @@
           @click="updateTodoItem"
         ></div>
       </div>
-      <button data-cy="todo-item-delete-button" @click="removeTodoItem">
+      <button data-cy="todo-item-delete-button" @click="toggleConfirmDialog">
         <span class="icon-delete-activity-item"></span>
       </button>
     </div>
@@ -92,6 +92,9 @@ export default {
     },
   },
   methods: {
+    toggleConfirmDialog(value) {
+      store.dispatch("toggleConfirmDialog", { value });
+    },
     async updateTodoItem() {
       try {
         await store.dispatch("updateTodoItem", {

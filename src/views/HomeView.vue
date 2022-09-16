@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <confirm-dialog data-cy="activity-delete-confirm-dialog" />
     <div class="mt-10 mx-56">
       <div class="flex justify-between">
         <h2 data-cy="activity-title" class="text-4xl font-bold">Activity</h2>
@@ -31,6 +32,7 @@
 import AddButton from "@/components/AddButton.vue";
 import EmptyStateImage from "@/components/EmptyStateImage.vue";
 import ActivityCard from "@/components/ActivityCard.vue";
+import ConfirmDialog from "@/components/ConfirmDialog.vue";
 
 import store from "@/store";
 import { mapGetters } from "vuex";
@@ -38,7 +40,7 @@ import { mapGetters } from "vuex";
 export default {
   name: "HomeView",
 
-  components: { AddButton, EmptyStateImage, ActivityCard },
+  components: { AddButton, EmptyStateImage, ActivityCard, ConfirmDialog },
 
   computed: mapGetters({
     activityData: "activityData",
@@ -49,6 +51,9 @@ export default {
   },
 
   methods: {
+    toggleInputDialog(value) {
+      store.dispatch("toggleInputDialog", { value });
+    },
     async loadActivity() {
       try {
         await store.dispatch("getActivity");
