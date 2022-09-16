@@ -100,6 +100,13 @@ export default {
         this.selectedOption = this.options.find(
           (option) => option.value === this.selectedTodoPriority
         );
+      } else {
+        this.selectedOption = {};
+        this.selectedOption = {
+          color: "#00a790",
+          title: "Normal",
+          value: "normal",
+        };
       }
     },
   },
