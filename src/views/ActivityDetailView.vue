@@ -8,6 +8,12 @@
           <h2 data-cy="activity-detail-title" class="text-4xl font-bold">
             {{ activityDetailData.title }}
           </h2>
+          <input
+            class="mt-1 h-3/5 w-2/5 bg-inherit border-b-2 border-gray-700 text-2xl font-bold focus:outline-none"
+            type="text"
+            name="activityTitle"
+            value="Apa iya"
+          />
           <span
             data-cy="edit-activity-title-button"
             @click="changeActivityTitle"
