@@ -32,10 +32,7 @@ export default {
     getActivity: Function,
   },
   data() {
-    return {
-      baseUrl: "https://todo.api.devcode.gethired.id",
-      userEmail: "dururu@gmail.com",
-    };
+    return {};
   },
   methods: {
     formattedDate(value) {

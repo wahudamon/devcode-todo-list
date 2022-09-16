@@ -28,6 +28,7 @@ export default createStore({
   actions: {
     async getActivity({ commit }) {
       try {
+        console.log();
         let response = await axios.get(`${baseUrl}/activity-groups`, {
           params: {
             email: userEmail,
