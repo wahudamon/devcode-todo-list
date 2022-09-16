@@ -42,7 +42,6 @@ import EmptyStateImage from "@/components/EmptyStateImage.vue";
 import TodoItemCard from "@/components/TodoItemCard.vue";
 import InputDialog from "@/components/InputDialog.vue";
 
-import axios from "axios";
 import store from "@/store";
 
 export default {
@@ -78,14 +77,11 @@ export default {
     },
     async changeActivityTitle() {
       try {
-        let response = await axios.patch(
-          `${this.baseUrl}/activity-groups/${this.$route.params.id}`,
-          {
-            title: "Betul Banget",
-          }
-        );
-
-        return response;
+        await store.dispatch("updateActivity", {
+          id: this.$route.params.id,
+          title: "Betul Banget",
+        });
+        this.loadDetailActivity();
       } catch (err) {
         console.log(err);
       }

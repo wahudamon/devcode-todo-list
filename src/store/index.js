@@ -59,6 +59,18 @@ export default createStore({
         console.log(err);
       }
     },
+    async updateActivity(context, payload) {
+      try {
+        let response = await axios.patch(
+          `${baseUrl}/activity-groups/${payload.id}`,
+          payload
+        );
+
+        return response.data;
+      } catch (err) {
+        console.log(err);
+      }
+    },
     async removeActivity(context, payload) {
       try {
         let response = await axios.delete(
