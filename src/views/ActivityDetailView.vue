@@ -53,7 +53,7 @@
         >
           <todo-item-card
             v-for="todoItem in activityDetailData.todo_items"
-            data-cy="todo-item-card"
+            data-cy="todo-item"
             :key="todoItem.id"
             :todoItem="todoItem"
             @get-todo-detail="detailTodoItem"

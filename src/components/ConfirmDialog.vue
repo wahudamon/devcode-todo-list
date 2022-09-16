@@ -21,14 +21,14 @@
             </p>
             <div class="flex justify-center gap-4">
               <button
-                data-cy="confirm-dialog-cancel-button"
+                data-cy="modal-delete-cancel-button"
                 class="px-6 py-2 rounded-full btn-cancel"
                 @click="toggleDialog(false)"
               >
                 Batal
               </button>
               <button
-                data-cy="confirm-dialog-confirm-button"
+                data-cy="modal-delete-confirm-button"
                 class="px-6 py-2 rounded-full btn-confirm"
                 @click="removeItem"
               >

@@ -4,16 +4,16 @@
       class="pb-28 cursor-pointer activity-card_body"
       @click="$router.push(`/detail/${id}`)"
     >
-      <p data-cy="activity-card-title" class="text-md font-bold">
+      <p data-cy="activity-item-title" class="text-md font-bold">
         {{ title?.length > 16 ? `${title.slice(0, 16)}...` : title }}
       </p>
     </div>
     <div class="flex justify-between activity-card_footer">
-      <p data-cy="activity-card-date" class="mt-1 text-sm font-light">
+      <p data-cy="activity-item-date" class="mt-1 text-sm font-light">
         {{ formattedDate(date) }}
       </p>
       <button
-        data-cy="activity-card-delete-button"
+        data-cy="activity-item-delete-button"
         @click="toggleConfirmDialog"
       >
         <span class="icon-delete-activity-item"></span>
