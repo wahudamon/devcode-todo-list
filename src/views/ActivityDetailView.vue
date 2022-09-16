@@ -5,14 +5,20 @@
       <div class="flex justify-between">
         <div class="flex gap-4">
           <span class="icon-back" @click="$router.push('/')"></span>
-          <h2 data-cy="activity-detail-title" class="text-4xl font-bold">
+          <h2
+            v-if="!showInputText"
+            data-cy="activity-detail-title"
+            class="text-4xl font-bold"
+          >
             {{ activityDetailData.title }}
           </h2>
           <input
-            class="mt-1 h-3/5 w-2/5 bg-inherit border-b-2 border-gray-700 text-2xl font-bold focus:outline-none"
+            v-else-if="showInputText"
+            data-cy="activity-title-input-text"
+            v-model="inputTextValue"
+            class="h-4/5 w-3/5 bg-inherit border-b-2 border-gray-700 text-3xl font-bold focus:outline-none"
             type="text"
             name="activityTitle"
-            value="Apa iya"
           />
           <span
             data-cy="edit-activity-title-button"
@@ -60,6 +66,8 @@ export default {
       baseUrl: "https://todo.api.devcode.gethired.id",
       userEmail: "dururu@gmail.com",
       activityDetailData: {},
+      showInputText: false,
+      inputTextValue: "",
       showDialog: false,
     };
   },
@@ -82,14 +90,19 @@ export default {
       }
     },
     async changeActivityTitle() {
-      try {
-        await store.dispatch("updateActivity", {
-          id: this.$route.params.id,
-          title: "Betul Banget",
-        });
-        this.loadDetailActivity();
-      } catch (err) {
-        console.log(err);
+      if (this.showInputText) {
+        try {
+          await store.dispatch("updateActivity", {
+            id: this.$route.params.id,
+            title: this.inputTextValue,
+          });
+          this.loadDetailActivity();
+          this.showInputText = false;
+        } catch (err) {
+          console.log(err);
+        }
+      } else {
+        this.showInputText = true;
       }
     },
   },
