@@ -100,6 +100,17 @@ export default createStore({
         console.log(err);
       }
     },
+    async removeTodoItem(context, payload) {
+      try {
+        let response = await axios.delete(
+          `${baseUrl}/todo-items/${payload.id}`
+        );
+
+        return response.data;
+      } catch (err) {
+        console.log(err);
+      }
+    },
     toggleInputDialog({ commit }) {
       commit("TOGGLE_ACTIVITY_DIALOG");
     },

@@ -48,6 +48,7 @@
         >
           <todo-item-card
             v-for="todoItem in activityDetailData.todo_items"
+            data-cy="todo-item-card"
             :key="todoItem.id"
             :todoItem="todoItem"
           />

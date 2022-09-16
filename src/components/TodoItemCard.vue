@@ -1,8 +1,5 @@
 <template>
-  <div
-    data-cy="todo-item-card"
-    class="w-full h-full p-4 rounded-xl todo-item-card"
-  >
+  <div class="w-full h-full p-4 rounded-xl todo-item-card">
     <div class="flex justify-between todo-item-card_body">
       <div class="flex gap-4">
         <input
@@ -47,7 +44,7 @@
         </p>
         <div data-cy="todo-item-edit-button" class="icon-edit-todo-item"></div>
       </div>
-      <button data-cy="activity-card-delete-button">
+      <button data-cy="activity-card-delete-button" @click="removeTodoItem">
         <span class="icon-delete-activity-item"></span>
       </button>
     </div>
@@ -55,23 +52,26 @@
 </template>
 
 <script>
+import store from "@/store";
+
 export default {
   name: "TodoItemCard",
   props: {
     todoItem: Object,
   },
   data() {
-    return {
-      priorityColors: {
-        very_high: "#ED4C5C",
-        high: "#FFCE31",
-        normal: "#00A790",
-        low: "#43C4E3",
-        very_low: "#B01AFF",
-      },
-    };
+    return {};
   },
-  watch: {},
+  methods: {
+    async removeTodoItem() {
+      try {
+        await store.dispatch("removeTodoItem", { id: this.todoItem.id });
+        this.$parent.loadDetailActivity();
+      } catch (err) {
+        console.log(err);
+      }
+    },
+  },
 };
 </script>
 
