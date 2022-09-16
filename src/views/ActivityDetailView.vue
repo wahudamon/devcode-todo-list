@@ -1,18 +1,16 @@
 <template>
   <div class="activity-detail">
-    <input-dialog
-      data-cy="todo-item-input-dialog"
-      :inputMode="inputMode"
-      :selectedTodo="selectedTodo"
-    />
-    <confirm-dialog data-cy="modal-delete" />
     <div class="mt-10 mx-56">
       <div class="flex justify-between">
         <div class="flex gap-4">
-          <span class="icon-back" @click="$router.push('/')"></span>
+          <span
+            data-cy="todo-back-button"
+            class="icon-back"
+            @click="$router.push('/')"
+          ></span>
           <h2
             v-if="!showInputText"
-            data-cy="activity-detail-title"
+            data-cy="todo-title"
             class="text-4xl font-bold"
           >
             {{
@@ -39,10 +37,14 @@
           <button class="px-3 border border-gray-300 rounded-full">
             <span class="icon-sort"></span>
           </button>
-          <add-button
+          <button
             data-cy="todo-add-button"
-            :clickEvent="toggleInputDialog"
-          />
+            class="px-8 py-3 rounded-3xl text-white text-lg font-medium add-button"
+            @click="toggleInputDialog"
+          >
+            <span class="icon-plus"></span>
+            Tambah
+          </button>
         </div>
       </div>
       <div class="mt-8">
@@ -62,11 +64,16 @@
         <empty-state-image v-else pageName="activity-detail" />
       </div>
     </div>
+    <input-dialog
+      data-cy="todo-item-input-dialog"
+      :inputMode="inputMode"
+      :selectedTodo="selectedTodo"
+    />
+    <confirm-dialog data-cy="modal-delete" />
   </div>
 </template>
 
 <script>
-import AddButton from "@/components/AddButton.vue";
 import EmptyStateImage from "@/components/EmptyStateImage.vue";
 import TodoItemCard from "@/components/TodoItemCard.vue";
 import InputDialog from "@/components/InputDialog.vue";
@@ -79,7 +86,6 @@ export default {
   name: "ActivityDetailView",
 
   components: {
-    AddButton,
     TodoItemCard,
     EmptyStateImage,
     InputDialog,

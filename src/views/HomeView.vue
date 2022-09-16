@@ -1,7 +1,5 @@
 <template>
   <div class="home">
-    <confirm-dialog data-cy="modal-delete" />
-    <notification-dialog data-cy="modal-information" />
     <div class="mt-10 mx-56">
       <div class="flex justify-between">
         <h2 data-cy="activity-title" class="text-4xl font-bold">Activity</h2>
@@ -29,6 +27,8 @@
         <empty-state-image v-else pageName="home" />
       </div>
     </div>
+    <confirm-dialog />
+    <notification-dialog data-cy="modal-information" />
   </div>
 </template>
 
