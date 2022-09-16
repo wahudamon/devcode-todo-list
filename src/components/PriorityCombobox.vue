@@ -61,6 +61,10 @@
 <script>
 export default {
   name: "PriorityCombobox",
+  props: {
+    selectedTodoPriority: String,
+    inputMode: String,
+  },
   data() {
     return {
       isOptionsExpanded: false,
@@ -78,6 +82,9 @@ export default {
     selectedOption(val) {
       this.$emit("get-priority", val.value);
     },
+    selectedTodoPriority() {
+      this.getSelectedEditOption();
+    },
   },
   mounted() {
     this.$emit("get-priority", this.selectedOption.value);
@@ -86,6 +93,14 @@ export default {
     setOption(option) {
       this.selectedOption = option;
       this.isOptionsExpanded = false;
+    },
+    getSelectedEditOption() {
+      if (this.inputMode === "edit" && this.selectedTodoPriority) {
+        this.selectedOption = {};
+        this.selectedOption = this.options.find(
+          (option) => option.value === this.selectedTodoPriority
+        );
+      }
     },
   },
 };

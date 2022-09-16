@@ -52,6 +52,8 @@
             <div>
               <priority-combobox
                 data-cy="modal-add-priority-dropdown"
+                :selectedTodoPriority="input.priority"
+                :inputMode="inputMode"
                 @get-priority="getPriority"
               />
             </div>
@@ -106,6 +108,7 @@ export default {
     },
     selectedTodo(val) {
       this.input.title = val.title;
+      this.input.priority = val.priority;
     },
   },
   methods: {
@@ -144,8 +147,7 @@ export default {
         await store.dispatch("updateTodoItem", {
           id: this.selectedTodo.id,
           title: this.input.title,
-          // priority: this.input.priority,
-          is_active: this.selectedTodo.is_active,
+          priority: this.input.priority,
         });
 
         this.toggleDialog(false);
