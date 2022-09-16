@@ -1,10 +1,10 @@
 <template>
   <div class="home">
-    <confirm-dialog data-cy="activity-delete-confirm-dialog" />
+    <confirm-dialog data-cy="modal-delete" />
     <notification-dialog data-cy="modal-information" />
     <div class="mt-10 mx-56">
       <div class="flex justify-between">
-        <h2 data-cy="header-title" class="text-4xl font-bold">Activity</h2>
+        <h2 data-cy="activity-title" class="text-4xl font-bold">Activity</h2>
         <add-button
           data-cy="activity-add-button"
           :clickEvent="addNewActivity"

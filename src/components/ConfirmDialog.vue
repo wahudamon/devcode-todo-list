@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto">
+  <div data-cy="todo-modal-delete" class="container mx-auto">
     <div class="flex justify-center">
       <div
         v-show="isShow"
