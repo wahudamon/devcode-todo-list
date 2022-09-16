@@ -34,7 +34,10 @@
           <button class="px-3 border border-gray-300 rounded-full">
             <span class="icon-sort"></span>
           </button>
-          <add-button :clickEvent="toggleDialog" />
+          <add-button
+            data-cy="new-todo-item-button"
+            :clickEvent="addNewTodoItem"
+          />
         </div>
       </div>
       <div class="mt-8">
@@ -109,6 +112,18 @@ export default {
       } else {
         this.inputTextValue = this.activityDetailData?.title;
         this.showInputText = true;
+      }
+    },
+    async addNewTodoItem() {
+      try {
+        await store.dispatch("addNewTodoItem", {
+          activity_group_id: this.$route.params.id,
+          title: "Boleh juga",
+          priority: "high",
+        });
+        this.loadDetailActivity();
+      } catch (err) {
+        console.log(err);
       }
     },
   },

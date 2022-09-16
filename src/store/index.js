@@ -61,8 +61,6 @@ export default createStore({
           `${baseUrl}/activity-groups/${payload.id}`
         );
 
-        console.log(response.data);
-
         return response.data;
       } catch (err) {
         console.log(err);
@@ -87,6 +85,15 @@ export default createStore({
         let response = await axios.delete(
           `${baseUrl}/activity-groups/${payload.id}`
         );
+
+        return response.data;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async addNewTodoItem(context, payload) {
+      try {
+        let response = await axios.post(`${baseUrl}/todo-items`, payload);
 
         return response.data;
       } catch (err) {
