@@ -7,22 +7,22 @@ const userEmail = "dururu@gmail.com";
 export default createStore({
   state: {
     activityData: {},
-    inputDialog: false,
+    showInputDialog: false,
   },
   getters: {
     activityData(state) {
       return state.activityData;
     },
-    inputActivityDialog(state) {
-      return state.inputDialog;
+    showInputDialog(state) {
+      return state.showInputDialog;
     },
   },
   mutations: {
     GET_ACTIVITY_DATA(state, { data }) {
       state.activityData = data;
     },
-    TOGGLE_INPUT_DIALOG(state) {
-      state.inputDialog = !state.inputDialog;
+    TOGGLE_INPUT_DIALOG(state, { value }) {
+      state.showInputDialog = value;
     },
   },
   actions: {
@@ -128,8 +128,8 @@ export default createStore({
         console.log(err);
       }
     },
-    toggleInputDialog({ commit }) {
-      commit("TOGGLE_ACTIVITY_DIALOG");
+    toggleInputDialog({ commit }, { value }) {
+      commit("TOGGLE_INPUT_DIALOG", { value });
     },
   },
   modules: {},

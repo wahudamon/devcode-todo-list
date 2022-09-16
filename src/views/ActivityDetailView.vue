@@ -1,6 +1,6 @@
 <template>
   <div class="activity-detail">
-    <input-dialog :showDialog="showDialog" />
+    <input-dialog />
     <div class="mt-10 mx-56">
       <div class="flex justify-between">
         <div class="flex gap-4">
@@ -83,6 +83,7 @@ export default {
 
   mounted() {
     this.loadDetailActivity();
+    store.dispatch("toggleInputDialog", { value: true });
   },
 
   methods: {
