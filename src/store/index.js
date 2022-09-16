@@ -63,7 +63,9 @@ export default createStore({
       try {
         let response = await axios.patch(
           `${baseUrl}/activity-groups/${payload.id}`,
-          payload
+          {
+            title: payload.title,
+          }
         );
 
         return response.data;
