@@ -10,13 +10,17 @@
             data-cy="activity-detail-title"
             class="text-4xl font-bold"
           >
-            {{ activityDetailData.title }}
+            {{
+              activityDetailData.title?.length > 20
+                ? `${activityDetailData.title.slice(0, 20)}...`
+                : activityDetailData.title
+            }}
           </h2>
           <input
             v-else-if="showInputText"
             data-cy="activity-title-input-text"
             v-model="inputTextValue"
-            class="h-4/5 w-3/5 bg-inherit border-b-2 border-gray-700 text-3xl font-bold focus:outline-none"
+            class="h-4/5 w-4/5 bg-inherit border-b-2 border-gray-700 text-3xl font-bold focus:outline-none"
             type="text"
             name="activityTitle"
           />
@@ -102,6 +106,7 @@ export default {
           console.log(err);
         }
       } else {
+        this.inputTextValue = this.activityDetailData?.title;
         this.showInputText = true;
       }
     },

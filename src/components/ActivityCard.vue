@@ -5,7 +5,7 @@
       @click="$router.push(`/detail/${id}`)"
     >
       <p data-cy="activity-card-title" class="text-md font-bold">
-        {{ title }}
+        {{ title?.length > 16 ? `${title.slice(0, 16)}...` : title }}
       </p>
     </div>
     <div class="flex justify-between activity-card_footer">
