@@ -29,8 +29,10 @@
             <p class="mb-4 text-sm">Prioritas</p>
             <div class="flex justify-end">
               <button
+                data-cy="todo-item-submit-button"
                 class="px-6 py-2 text-white rounded-full"
                 style="background: #16abf8"
+                @click="addNewTodoItem"
               >
                 Simpan
               </button>
@@ -63,6 +65,19 @@ export default {
   methods: {
     toggleDialog(value) {
       store.dispatch("toggleInputDialog", { value });
+    },
+    async addNewTodoItem() {
+      try {
+        await store.dispatch("addNewTodoItem", {
+          activity_group_id: this.$route.params.id,
+          title: "Boleh juga",
+          priority: "high",
+        });
+        this.toggleDialog(false);
+        this.$parent.loadDetailActivity();
+      } catch (err) {
+        console.log(err);
+      }
     },
   },
 };

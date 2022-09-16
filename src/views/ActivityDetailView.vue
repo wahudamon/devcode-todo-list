@@ -1,6 +1,6 @@
 <template>
   <div class="activity-detail">
-    <input-dialog />
+    <input-dialog data-cy="todo-item-input-dialog" />
     <div class="mt-10 mx-56">
       <div class="flex justify-between">
         <div class="flex gap-4">
@@ -36,7 +36,7 @@
           </button>
           <add-button
             data-cy="new-todo-item-button"
-            :clickEvent="addNewTodoItem"
+            :clickEvent="toggleInputDialog"
           />
         </div>
       </div>
@@ -83,12 +83,11 @@ export default {
 
   mounted() {
     this.loadDetailActivity();
-    store.dispatch("toggleInputDialog", { value: true });
   },
 
   methods: {
-    toggleDialog() {
-      this.showDialog = !this.showDialog;
+    toggleInputDialog(value) {
+      store.dispatch("toggleInputDialog", { value });
     },
     async loadDetailActivity() {
       try {
@@ -114,18 +113,6 @@ export default {
       } else {
         this.inputTextValue = this.activityDetailData?.title;
         this.showInputText = true;
-      }
-    },
-    async addNewTodoItem() {
-      try {
-        await store.dispatch("addNewTodoItem", {
-          activity_group_id: this.$route.params.id,
-          title: "Boleh juga",
-          priority: "high",
-        });
-        this.loadDetailActivity();
-      } catch (err) {
-        console.log(err);
       }
     },
   },
