@@ -52,6 +52,17 @@
   opacity: 0.5;
 }
 
+.icon-danger-md {
+  width: 112px;
+  height: 112px;
+  background-image: url("@/assets/icons/dialog-delete-icon.svg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
 .icon-close {
   width: 24px;
   height: 24px;
@@ -64,17 +75,6 @@
 }
 
 .icon-alert-sm {
-  width: 24px;
-  height: 24px;
-  background-image: url("@/assets/icons/plus_icon.svg");
-  background-repeat: no-repeat;
-  background-size: 100%;
-  display: inline-block;
-  vertical-align: middle;
-  cursor: pointer;
-}
-
-.icon-danger-sm {
   width: 24px;
   height: 24px;
   background-image: url("@/assets/icons/plus_icon.svg");

@@ -7,27 +7,55 @@ const userEmail = "dururu@gmail.com";
 export default createStore({
   state: {
     activityData: {},
-    inputDialog: false,
+    selectedItem: {
+      type: "",
+      id: "",
+      title: "",
+    },
+    selectedTodo: {},
+    showInputDialog: false,
+    showConfirmDialog: false,
   },
   getters: {
     activityData(state) {
       return state.activityData;
     },
-    inputActivityDialog(state) {
-      return state.inputDialog;
+    selectedItem(state) {
+      return state.selectedItem;
+    },
+    selectedTodo(state) {
+      return state.selectedTodo;
+    },
+    showInputDialog(state) {
+      return state.showInputDialog;
+    },
+    showConfirmDialog(state) {
+      return state.showConfirmDialog;
     },
   },
   mutations: {
     GET_ACTIVITY_DATA(state, { data }) {
       state.activityData = data;
     },
-    TOGGLE_INPUT_DIALOG(state) {
-      state.inputDialog = !state.inputDialog;
+    SET_SELECTED_ITEM(state, { type, id, title }) {
+      state.selectedItem.type = type;
+      state.selectedItem.id = id;
+      state.selectedItem.title = title;
+    },
+    SET_SELECTED_TODO(state, data) {
+      state.selectedTodo = data;
+    },
+    TOGGLE_INPUT_DIALOG(state, { value }) {
+      state.showInputDialog = value;
+    },
+    TOGGLE_CONFIRM_DIALOG(state, { value }) {
+      state.showConfirmDialog = value;
     },
   },
   actions: {
     async getActivity({ commit }) {
       try {
+        console.log();
         let response = await axios.get(`${baseUrl}/activity-groups`, {
           params: {
             email: userEmail,
@@ -100,6 +128,17 @@ export default createStore({
         console.log(err);
       }
     },
+    async detailTodo({ commit }, payload) {
+      try {
+        let response = await axios.get(`${baseUrl}/todo-items/${payload.id}`);
+
+        commit("SET_SELECTED_TODO", response.data);
+
+        return response.data;
+      } catch (err) {
+        console.log(err);
+      }
+    },
     async updateTodoItem(context, payload) {
       try {
         let response = await axios.patch(
@@ -127,8 +166,14 @@ export default createStore({
         console.log(err);
       }
     },
-    toggleInputDialog({ commit }) {
-      commit("TOGGLE_ACTIVITY_DIALOG");
+    setSelectedItem({ commit }, { type, id, title }) {
+      commit("SET_SELECTED_ITEM", { type, id, title });
+    },
+    toggleInputDialog({ commit }, { value }) {
+      commit("TOGGLE_INPUT_DIALOG", { value });
+    },
+    toggleConfirmDialog({ commit }, { value }) {
+      commit("TOGGLE_CONFIRM_DIALOG", { value });
     },
   },
   modules: {},
