@@ -21,7 +21,7 @@
 
 <script>
 import moment from "moment";
-import axios from "axios";
+import store from "@/store";
 
 export default {
   name: "ActivityCard",
@@ -29,7 +29,7 @@ export default {
     id: String,
     title: String,
     date: String,
-    deleteFunction: Function,
+    getActivity: Function,
   },
   data() {
     return {
@@ -43,15 +43,8 @@ export default {
     },
     async removeActivity(id) {
       try {
-        let response = await axios.delete(`${this.baseUrl}/activity-groups/`, {
-          params: {
-            id,
-          },
-        });
-
-        console.log("Success delete activity!");
-
-        return response;
+        await store.dispatch("removeActivity", { id });
+        this.getActivity();
       } catch (err) {
         console.log(err);
       }

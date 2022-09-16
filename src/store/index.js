@@ -48,6 +48,17 @@ export default createStore({
         console.log(err);
       }
     },
+    async removeActivity(context, payload) {
+      try {
+        let response = await axios.delete(
+          `${baseUrl}/activity-groups/${payload.id}`
+        );
+
+        return response.data;
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
   modules: {},
 });

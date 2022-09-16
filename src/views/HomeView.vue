@@ -17,6 +17,7 @@
             :id="activity.id?.toString()"
             :title="activity.title"
             :date="activity.created_at"
+            :getActivity="loadActivity"
           />
         </div>
         <empty-state-image v-else pageName="home" />
