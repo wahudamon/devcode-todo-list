@@ -28,6 +28,7 @@
       </div>
     </div>
     <confirm-dialog data-cy="modal-delete" />
+    <new-confirm-dialog data-cy="modal-delete" />
     <notification-dialog data-cy="modal-information" />
   </div>
 </template>
@@ -38,6 +39,7 @@ import AddButton from "@/components/AddButton.vue";
 import EmptyStateImage from "@/components/EmptyStateImage.vue";
 import ActivityCard from "@/components/ActivityCard.vue";
 import ConfirmDialog from "@/components/ConfirmDialog.vue";
+import NewConfirmDialog from "@/components/NewConfirmDialog.vue";
 import NotificationDialog from "@/components/NotificationDialog.vue";
 
 import store from "@/store";
@@ -51,6 +53,7 @@ export default {
     EmptyStateImage,
     ActivityCard,
     ConfirmDialog,
+    NewConfirmDialog,
     NotificationDialog,
   },
 
