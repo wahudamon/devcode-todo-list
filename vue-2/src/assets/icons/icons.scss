@@ -1,0 +1,75 @@
+.icon-plus {
+  width: 18px;
+  height: 18px;
+  background-image: url("@/assets/icons/plus_icon.svg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.icon-delete-activity-item {
+  width: 18px;
+  height: 18px;
+  background-image: url("@/assets/icons/activity-item-delete_icon.svg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.icon-back {
+  width: 32px;
+  height: 32px;
+  background-image: url("@/assets/icons/back_icon.svg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.icon-edit-title {
+  width: 24px;
+  height: 24px;
+  background-image: url("@/assets/icons/todo-title-edit_icon.svg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.icon-edit-todo-item {
+  width: 20px;
+  height: 20px;
+  background-image: url("@/assets/icons/todo-title-edit_icon.svg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.icon-danger-md {
+  width: 112px;
+  height: 112px;
+  background-image: url("@/assets/icons/dialog-delete-icon.svg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.icon_info {
+  width: 24px;
+  height: 24px;
+  background-image: url("@/assets/icons/info_icon.svg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
