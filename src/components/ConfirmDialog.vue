@@ -1,52 +1,48 @@
 <template>
-  <div data-cy="todo-modal-delete" class="container mx-auto">
-    <div class="flex justify-center">
-      <div
-        v-if="isShow"
-        class="absolute inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50"
-      >
-        <div class="w-2/5 h-2/5 p-6 bg-white rounded-xl shadow-xl">
-          <div class="flex items-center justify-center">
-            <span data-cy="confirm-dialog-icon" class="icon-danger-md"></span>
-          </div>
-          <div class="mt-4 text-center">
-            <p data-cy="confirm-dialog-text" class="mb-4 text-lg">
-              Apakah anda yakin menghapus {{ selectedItem.type }} <br />
-              <span class="font-bold">{{
-                selectedItem.title?.length > 20
-                  ? `"${selectedItem.title.slice(0, 20)}..."`
-                  : `"${selectedItem.title}"`
-              }}</span
-              >?
-            </p>
-            <div class="flex justify-center gap-4">
-              <button
-                data-cy="modal-delete-cancel-button"
-                class="px-6 py-2 rounded-full btn-cancel"
-                @click="toggleDialog(false)"
-              >
-                Batal
-              </button>
-              <button
-                data-cy="modal-delete-confirm-button"
-                class="px-6 py-2 rounded-full btn-confirm"
-                @click="removeItem"
-              >
-                Hapus
-              </button>
-            </div>
+  <div data-app class="text-center">
+    <v-dialog v-model="isShow" width="500">
+      <div class="p-6 bg-white rounded-xl shadow-xl">
+        <div class="flex items-center justify-center">
+          <span data-cy="confirm-dialog-icon" class="icon-danger-md"></span>
+        </div>
+        <div class="mt-4 text-center">
+          <p data-cy="confirm-dialog-text" class="mb-4 text-lg">
+            Apakah anda yakin menghapus {{ selectedItem.type }} <br />
+            <span class="font-bold">{{
+              selectedItem.title?.length > 20
+                ? `"${selectedItem.title.slice(0, 20)}..."`
+                : `"${selectedItem.title}"`
+            }}</span
+            >?
+          </p>
+          <div class="flex justify-center gap-4">
+            <button
+              data-cy="modal-delete-cancel-button"
+              class="px-6 py-2 rounded-full btn-cancel"
+              @click="toggleDialog(false)"
+            >
+              Batal
+            </button>
+            <button
+              data-cy="modal-delete-confirm-button"
+              class="px-6 py-2 rounded-full btn-confirm"
+              @click="removeItem"
+            >
+              Hapus
+            </button>
           </div>
         </div>
       </div>
-    </div>
+    </v-dialog>
   </div>
 </template>
+
 <script>
 import { mapGetters } from "vuex";
 import store from "@/store";
 
 export default {
-  name: "ConfirmDialog",
+  name: "NewConfirmDialog",
   data() {
     return {
       isShow: false,
@@ -94,6 +90,7 @@ export default {
   },
 };
 </script>
+
 <style lang="scss">
 @import "@/assets/icons/icons";
 

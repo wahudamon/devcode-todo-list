@@ -1,10 +1,13 @@
-import { createStore } from "vuex";
+import Vue from "vue";
+import Vuex from "vuex";
 import axios from "axios";
+
+Vue.use(Vuex);
 
 const baseUrl = "https://todo.api.devcode.gethired.id";
 const userEmail = "dururu@gmail.com";
 
-export default createStore({
+export default new Vuex.Store({
   state: {
     activityData: {},
     selectedItem: {
