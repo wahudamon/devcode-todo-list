@@ -1,77 +1,85 @@
 <template>
-  <div class="container mx-auto">
-    <div class="flex justify-center">
-      <div
-        v-if="isShow"
-        class="absolute inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50 z-50"
+  <div data-app>
+    <v-dialog v-model="isShow" width="700">
+      <v-card
+        class="pt-6 px-6 bg-white rounded-md shadow-xl"
+        style="height: 400px"
       >
-        <div class="w-2/5 h-2/5 pt-6 px-6 bg-white rounded-md shadow-xl">
-          <div
-            data-cy="todo-input-dialog-header"
-            class="flex items-center justify-between"
+        <v-card-title
+          data-cy="todo-input-dialog-header"
+          class="flex items-center justify-between"
+        >
+          <h3
+            data-cy="todo-input-dialog-title"
+            class="text-2xl font-semibold text-black"
           >
-            <h3 data-cy="todo-input-dialog-title" class="text-2xl">
-              {{ inputMode === "edit" ? "Edit Item" : "Tambah List Item" }}
-            </h3>
-            <svg
-              data-cy="todo-input-dialog-close-button"
-              @click="toggleDialog(false)"
-              xmlns="http://www.w3.org/2000/svg"
-              class="w-8 h-8 text-red-900 cursor-pointer"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-          </div>
-          <div data-cy="todo-input-dialog-body" class="mt-4">
-            <div>
-              <label data-cy="todo-input-title-label" class="mb-4 text-sm"
-                >Nama List Item</label
-              >
-            </div>
-            <div data-cy="modal-add-name-input">
-              <input
-                v-model="input.title"
-                class="h-4/5 w-3/5 p-1 bg-inherit border border-gray-700 rounded-md text-md focus:outline-none"
-                type="text"
-              />
-            </div>
-            <div class="mt-4">
-              <label data-cy="todo-input-priority-label" class="mb-4 text-sm"
-                >Prioritas</label
-              >
-            </div>
-            <div data-cy="modal-add-priority-dropdown">
-              <priority-combobox
-                :selectedTodoPriority="input.priority"
-                :inputMode="inputMode"
-                @get-priority="getPriority"
-              />
-            </div>
-          </div>
-          <div
-            data-cy="modal-add-save-button"
-            class="flex justify-end pt-12 submit-button"
+            {{ inputMode === "edit" ? "Edit Item" : "Tambah List Item" }}
+          </h3>
+          <svg
+            data-cy="todo-input-dialog-close-button"
+            @click="toggleDialog(false)"
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-8 h-8 text-red-900 cursor-pointer"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
           >
-            <button
-              :disabled="input.title === ''"
-              class="px-6 py-2 text-white rounded-full"
-              style="background: #16abf8"
-              @click="onClickSubmit"
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        </v-card-title>
+        <v-divider></v-divider>
+        <v-card-text data-cy="todo-input-dialog-body" class="mt-4 mb-4">
+          <div>
+            <label
+              data-cy="todo-input-title-label"
+              class="mb-4 text-lg text-black font-semibold"
+              >NAMA LIST ITEM</label
             >
-              Simpan
-            </button>
           </div>
-        </div>
-      </div>
-    </div>
+          <div data-cy="modal-add-name-input" class="pt-2 pb-3">
+            <input
+              v-model="input.title"
+              class="h-4/5 w-full p-2 bg-inherit border-2 border-solid border-gray-300 rounded-md text-md text-black focus:outline-none focus:border-blue-300"
+              type="text"
+              placeholder="Tambahkan nama list item"
+            />
+          </div>
+          <div class="mt-4">
+            <label
+              data-cy="todo-input-priority-label"
+              class="mb-4 text-lg text-black font-semibold"
+              >PRIORITAS</label
+            >
+          </div>
+          <div data-cy="modal-add-priority-dropdown">
+            <priority-combobox
+              :selectedTodoPriority="input.priority"
+              :inputMode="inputMode"
+              @get-priority="getPriority"
+            />
+          </div>
+        </v-card-text>
+        <v-divider></v-divider>
+        <v-card-actions
+          data-cy="modal-add-save-button"
+          class="flex justify-end pt-12 submit-button"
+        >
+          <button
+            :disabled="input.title === ''"
+            class="px-6 py-2 text-white rounded-full"
+            style="background: #16abf8"
+            @click="onClickSubmit"
+          >
+            Simpan
+          </button>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 <script>
@@ -159,8 +167,4 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-.container {
-  z-index: 99 !important;
-}
-</style>
+<style lang="scss"></style>
