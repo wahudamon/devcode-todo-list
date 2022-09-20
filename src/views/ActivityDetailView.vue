@@ -35,7 +35,10 @@
           ></div>
         </div>
         <div class="flex gap-4">
-          <button class="px-3 border border-gray-300 rounded-full">
+          <button
+            data-cy="todo-sort-button"
+            class="px-3 w-14 h-14 todo-sort__button"
+          >
             <span class="icon-sort"></span>
           </button>
           <button
@@ -176,6 +179,13 @@ export default {
 .todo-title {
   &__input {
     border-bottom: 1px solid black;
+  }
+}
+
+.todo-sort {
+  &__button {
+    border: 1px solid #d5d5d5;
+    border-radius: 50%;
   }
 }
 </style>
