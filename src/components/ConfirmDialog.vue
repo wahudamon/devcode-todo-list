@@ -61,6 +61,13 @@ export default {
     toggleDialog(value) {
       store.dispatch("toggleConfirmDialog", { value });
     },
+    toggleNotifDialog() {
+      store.dispatch("toggleNotificationDialog", { value: true });
+      setTimeout(
+        () => store.dispatch("toggleNotificationDialog", { value: false }),
+        2000
+      );
+    },
     async removeItem() {
       if (this.selectedItem.type === "activity") {
         try {
@@ -68,11 +75,7 @@ export default {
 
           this.$parent.loadActivity();
           this.toggleDialog(false);
-          store.dispatch("toggleNotificationDialog", { value: true });
-          setTimeout(
-            () => store.dispatch("toggleNotificationDialog", { value: false }),
-            2000
-          );
+          this.toggleNotifDialog();
         } catch (err) {
           console.log(err);
         }
@@ -82,6 +85,7 @@ export default {
 
           this.$parent.loadDetailActivity();
           this.toggleDialog(false);
+          this.toggleNotifDialog();
         } catch (err) {
           console.log(err);
         }

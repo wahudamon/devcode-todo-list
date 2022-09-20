@@ -75,6 +75,7 @@
       :selectedTodo="selectedTodo"
     />
     <confirm-dialog data-cy="modal-delete" />
+    <notification-dialog data-cy="modal-information" deletedItem="List Item" />
   </div>
 </template>
 
@@ -83,6 +84,7 @@ import EmptyStateImage from "@/components/EmptyStateImage.vue";
 import TodoItemCard from "@/components/TodoItemCard.vue";
 import InputDialog from "@/components/InputDialog.vue";
 import ConfirmDialog from "@/components/ConfirmDialog.vue";
+import NotificationDialog from "@/components/NotificationDialog.vue";
 
 import store from "@/store";
 import { mapGetters } from "vuex";
@@ -95,6 +97,7 @@ export default {
     EmptyStateImage,
     InputDialog,
     ConfirmDialog,
+    NotificationDialog,
   },
 
   data() {
