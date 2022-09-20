@@ -35,12 +35,6 @@
           ></div>
         </div>
         <div class="flex gap-4">
-          <!-- <button
-            data-cy="todo-sort-button"
-            class="px-3 w-14 h-14 todo-sort__button"
-          >
-            <span class="icon-sort"></span>
-          </button> -->
           <todo-sort-combobox />
           <button
             data-cy="todo-add-button"
@@ -134,11 +128,27 @@ export default {
     resetSelectedTodo() {
       this.selectedTodo = {};
     },
+    sortTodoList(data) {
+      data.todo_items.sort((a, b) => {
+        const titleA = a.title.toLowerCase();
+        const titleB = b.title.toLowerCase();
+
+        if (titleA < titleB) {
+          return -1;
+        }
+        if (titleA > titleB) {
+          return 1;
+        }
+
+        return 0;
+      });
+    },
     async loadDetailActivity() {
       try {
         this.activityDetailData = await store.dispatch("detailActivity", {
           id: this.$route.params.id,
         });
+        this.sortTodoList(this.activityDetailData);
       } catch (err) {
         console.log(err);
       }
