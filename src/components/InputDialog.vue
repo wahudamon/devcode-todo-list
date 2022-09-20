@@ -56,8 +56,9 @@
               >PRIORITAS</label
             >
           </div>
-          <div data-cy="modal-add-priority-dropdown">
+          <div>
             <priority-combobox
+              data-cy="modal-add-priority-dropdown"
               :selectedTodoPriority="input.priority"
               :inputMode="inputMode"
               @get-priority="getPriority"
@@ -65,14 +66,11 @@
           </div>
         </v-card-text>
         <v-divider></v-divider>
-        <v-card-actions
-          data-cy="modal-add-save-button"
-          class="flex justify-end pt-12 submit-button"
-        >
+        <v-card-actions class="flex justify-end pt-12">
           <button
+            data-cy="modal-add-save-button"
             :disabled="input.title === ''"
-            class="px-6 py-2 text-white rounded-full"
-            style="background: #16abf8"
+            class="px-6 py-2 text-white rounded-full submit-button"
             @click="onClickSubmit"
           >
             Simpan
@@ -167,4 +165,12 @@ export default {
   },
 };
 </script>
-<style lang="scss"></style>
+<style lang="scss">
+.submit-button {
+  background: #16abf8;
+
+  &:disabled {
+    opacity: 0.2;
+  }
+}
+</style>

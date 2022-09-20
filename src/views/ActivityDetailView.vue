@@ -12,6 +12,7 @@
             v-if="!showInputText"
             data-cy="todo-title"
             class="text-4xl font-bold"
+            @click="updateTitle"
           >
             {{
               activityDetailData.title?.length > 20
@@ -20,15 +21,16 @@
             }}
           </h1>
           <input
-            v-else-if="showInputText"
+            v-show="showInputText"
             v-model="inputTextValue"
             class="h-4/5 w-4/5 bg-inherit border-b-2 border-gray-700 text-3xl font-bold focus:outline-none"
+            ref="todoTitleInput"
             type="text"
-            name="activityTitle"
+            @blur="updateTitle"
           />
           <div
             data-cy="todo-title-edit-button"
-            @click="changeActivityTitle"
+            @click="updateTitle"
             class="mt-2 icon-edit-title"
           ></div>
         </div>
@@ -60,15 +62,20 @@
             @get-todo-detail="detailTodoItem"
           />
         </div>
-        <empty-state-image v-else pageName="activity-detail" />
+        <empty-state-image
+          v-else
+          data-cy="todo-empty-state"
+          pageName="activity-detail"
+        />
       </div>
     </div>
     <input-dialog
-      data-cy="todo-item-input-dialog"
+      data-cy="modal-add"
       :inputMode="inputMode"
       :selectedTodo="selectedTodo"
     />
     <confirm-dialog data-cy="modal-delete" />
+    <notification-dialog data-cy="modal-information" deletedItem="List Item" />
   </div>
 </template>
 
@@ -77,6 +84,7 @@ import EmptyStateImage from "@/components/EmptyStateImage.vue";
 import TodoItemCard from "@/components/TodoItemCard.vue";
 import InputDialog from "@/components/InputDialog.vue";
 import ConfirmDialog from "@/components/ConfirmDialog.vue";
+import NotificationDialog from "@/components/NotificationDialog.vue";
 
 import store from "@/store";
 import { mapGetters } from "vuex";
@@ -89,6 +97,7 @@ export default {
     EmptyStateImage,
     InputDialog,
     ConfirmDialog,
+    NotificationDialog,
   },
 
   data() {
@@ -137,7 +146,7 @@ export default {
         console.log(err);
       }
     },
-    async changeActivityTitle() {
+    async updateTitle() {
       if (this.showInputText) {
         try {
           await store.dispatch("updateActivity", {
@@ -152,6 +161,9 @@ export default {
       } else {
         this.inputTextValue = this.activityDetailData?.title;
         this.showInputText = true;
+        this.$nextTick(() => {
+          this.$refs.todoTitleInput.focus();
+        });
       }
     },
   },

@@ -1,5 +1,5 @@
 <template>
-  <div data-cy="empty-state-image">
+  <div>
     <img
       v-if="pageName === 'home'"
       class="w-4/5 h-4/5"
