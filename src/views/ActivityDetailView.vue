@@ -35,12 +35,13 @@
           ></div>
         </div>
         <div class="flex gap-4">
-          <button
+          <!-- <button
             data-cy="todo-sort-button"
             class="px-3 w-14 h-14 todo-sort__button"
           >
             <span class="icon-sort"></span>
-          </button>
+          </button> -->
+          <todo-sort-combobox />
           <button
             data-cy="todo-add-button"
             class="px-8 py-3 rounded-3xl text-white text-lg font-medium add-button"
@@ -85,6 +86,7 @@
 <script>
 import EmptyStateImage from "@/components/EmptyStateImage.vue";
 import TodoItemCard from "@/components/TodoItemCard.vue";
+import TodoSortCombobox from "@/components/TodoSortCombobox.vue";
 import InputDialog from "@/components/InputDialog.vue";
 import ConfirmDialog from "@/components/ConfirmDialog.vue";
 import NotificationDialog from "@/components/NotificationDialog.vue";
@@ -101,6 +103,7 @@ export default {
     InputDialog,
     ConfirmDialog,
     NotificationDialog,
+    TodoSortCombobox,
   },
 
   data() {
