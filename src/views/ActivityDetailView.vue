@@ -129,32 +129,43 @@ export default {
       this.selectedTodo = {};
     },
     sortTodoList(data) {
+      data.todo_items.sort((a, b) => {
+        const orderA = a.id;
+        const orderB = b.id;
+
+        if (orderA > orderB) {
+          return -1;
+        }
+        if (orderA < orderB) {
+          return 1;
+        }
+
+        return 0;
+      });
+      // Nama
       // data.todo_items.sort((a, b) => {
       //   const titleA = a.title.toLowerCase();
       //   const titleB = b.title.toLowerCase();
-
       //   if (titleA < titleB) {
       //     return -1;
       //   }
       //   if (titleA > titleB) {
       //     return 1;
       //   }
-
       //   return 0;
       // });
-      data.todo_items.sort((a, b) => {
-        const titleA = a.is_active;
-        const titleB = b.is_active;
-
-        if (titleA > titleB) {
-          return -1;
-        }
-        if (titleA < titleB) {
-          return 1;
-        }
-
-        return 0;
-      });
+      // Status
+      // data.todo_items.sort((a, b) => {
+      //   const isActiveA = a.is_active;
+      //   const isActiveB = b.is_active;
+      //   if (isActiveA > isActiveB) {
+      //     return -1;
+      //   }
+      //   if (isActiveA < isActiveB) {
+      //     return 1;
+      //   }
+      //   return 0;
+      // });
     },
     async loadDetailActivity() {
       try {
