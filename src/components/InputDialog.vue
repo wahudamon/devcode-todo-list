@@ -71,7 +71,6 @@
             data-cy="modal-add-save-button"
             :disabled="input.title === ''"
             class="px-6 py-2 text-white rounded-full submit-button"
-            style="background: #16abf8"
             @click="onClickSubmit"
           >
             Simpan
@@ -166,4 +165,12 @@ export default {
   },
 };
 </script>
-<style lang="scss"></style>
+<style lang="scss">
+.submit-button {
+  background: #16abf8;
+
+  &:disabled {
+    opacity: 0.2;
+  }
+}
+</style>
