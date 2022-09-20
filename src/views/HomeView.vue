@@ -24,7 +24,11 @@
             data-cy="activity-item"
           />
         </div>
-        <empty-state-image v-else pageName="home" />
+        <empty-state-image
+          v-else
+          data-cy="activity-empty-state"
+          pageName="home"
+        />
       </div>
     </div>
     <confirm-dialog data-cy="modal-delete" />

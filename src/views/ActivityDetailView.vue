@@ -60,7 +60,11 @@
             @get-todo-detail="detailTodoItem"
           />
         </div>
-        <empty-state-image v-else pageName="activity-detail" />
+        <empty-state-image
+          v-else
+          data-cy="todo-empty-state"
+          pageName="activity-detail"
+        />
       </div>
     </div>
     <input-dialog
