@@ -23,7 +23,7 @@
           <input
             v-show="showInputText"
             v-model="inputTextValue"
-            class="h-4/5 w-4/5 bg-inherit border-b-2 border-gray-700 text-3xl font-bold focus:outline-none"
+            class="h-4/5 w-4/5 bg-inherit text-3xl font-bold focus:outline-none todo-title__input"
             ref="todoTitleInput"
             type="text"
             @blur="updateTitle"
@@ -172,4 +172,10 @@ export default {
 
 <style lang="scss">
 @import "@/assets/icons/icons";
+
+.todo-title {
+  &__input {
+    border-bottom: 1px solid black;
+  }
+}
 </style>
