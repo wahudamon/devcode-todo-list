@@ -70,7 +70,7 @@
       </div>
     </div>
     <input-dialog
-      data-cy="todo-item-input-dialog"
+      data-cy="modal-add"
       :inputMode="inputMode"
       :selectedTodo="selectedTodo"
     />
