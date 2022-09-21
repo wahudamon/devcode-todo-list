@@ -128,51 +128,79 @@ export default {
     resetSelectedTodo() {
       this.selectedTodo = {};
     },
-    sortTodoList(data) {
-      data.todo_items.sort((a, b) => {
-        const orderA = a.id;
-        const orderB = b.id;
+    sortTodoList(selection, data) {
+      switch (selection) {
+        case "newest":
+          data.todo_items.sort((a, b) => {
+            const orderA = a.id;
+            const orderB = b.id;
 
-        if (orderA > orderB) {
-          return -1;
-        }
-        if (orderA < orderB) {
-          return 1;
-        }
+            if (orderA > orderB) {
+              return -1;
+            }
+            if (orderA < orderB) {
+              return 1;
+            }
 
-        return 0;
-      });
-      // Nama
-      // data.todo_items.sort((a, b) => {
-      //   const titleA = a.title.toLowerCase();
-      //   const titleB = b.title.toLowerCase();
-      //   if (titleA < titleB) {
-      //     return -1;
-      //   }
-      //   if (titleA > titleB) {
-      //     return 1;
-      //   }
-      //   return 0;
-      // });
-      // Status
-      // data.todo_items.sort((a, b) => {
-      //   const isActiveA = a.is_active;
-      //   const isActiveB = b.is_active;
-      //   if (isActiveA > isActiveB) {
-      //     return -1;
-      //   }
-      //   if (isActiveA < isActiveB) {
-      //     return 1;
-      //   }
-      //   return 0;
-      // });
+            return 0;
+          });
+          break;
+        case "oldest":
+          data.todo_items.reverse((a, b) => {
+            const orderA = a.id;
+            const orderB = b.id;
+
+            if (orderA > orderB) {
+              return -1;
+            }
+            if (orderA < orderB) {
+              return 1;
+            }
+
+            return 0;
+          });
+          break;
+        case "ascending":
+          data.todo_items.sort((a, b) => {
+            const titleA = a.title.toLowerCase();
+            const titleB = b.title.toLowerCase();
+            if (titleA < titleB) {
+              return -1;
+            }
+            if (titleA > titleB) {
+              return 1;
+            }
+            return 0;
+          });
+          break;
+        case "descending":
+          data.todo_items.reverse((a, b) => {
+            const titleA = a.title.toLowerCase();
+            const titleB = b.title.toLowerCase();
+            if (titleA < titleB) {
+              return -1;
+            }
+            if (titleA > titleB) {
+              return 1;
+            }
+            return 0;
+          });
+          break;
+        case "not_done":
+          data.todo_items = data.todo_items.filter(
+            (item) => item.is_active === 1
+          );
+          break;
+        default:
+          return true;
+      }
     },
     async loadDetailActivity() {
       try {
         this.activityDetailData = await store.dispatch("detailActivity", {
           id: this.$route.params.id,
         });
-        this.sortTodoList(this.activityDetailData);
+        this.sortTodoList("newest", this.activityDetailData);
       } catch (err) {
         console.log(err);
       }

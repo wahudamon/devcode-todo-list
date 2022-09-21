@@ -2,7 +2,7 @@
   <div class="relative text-md text-black">
     <button
       data-cy="todo-sort-button"
-      class="px-3 w-14 h-14 todo-sort__button"
+      class="px-3 w-12 h-12 todo-sort__button"
       @click="isOptionsExpanded = !isOptionsExpanded"
       @blur="isOptionsExpanded = false"
     >
@@ -18,11 +18,11 @@
     >
       <ul
         v-show="isOptionsExpanded"
-        class="absolute left-0 right-0 mt-2 bg-white divide-y rounded-lg shadow-lg overflow-hidden sort-dropdown__list"
+        class="absolute left-0 right-0 mt-4 bg-white divide-y rounded-lg shadow-lg overflow-hidden sort-dropdown__list"
       >
         <li
           v-for="(option, index) in options"
-          data-cy="modal-add-priority-item"
+          data-cy="sort-selection"
           :key="index"
           class="px-3 py-3 flex gap-2 transition-colors duration-300 cursor-pointer hover:bg-gray-200 sort-dropdown__item"
           @mousedown.prevent="setOption(option)"
