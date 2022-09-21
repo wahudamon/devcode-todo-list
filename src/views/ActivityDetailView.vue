@@ -38,7 +38,10 @@
           <todo-sort-combobox @load-detail-act="loadDetailActivity" />
           <button
             data-cy="todo-add-button"
-            class="px-8 py-3 rounded-3xl text-white text-lg font-medium add-button"
+            class="px-8 py-3 rounded-3xl text-white text-lg font-medium add-todo__button"
+            :disabled="
+              activityDetailData?.todo_items?.length === todosData.limit
+            "
             @click="toggleInputDialog"
           >
             <span class="icon-plus"></span>
@@ -104,6 +107,7 @@ export default {
     return {
       selectedTodo: {},
       activityDetailData: {},
+      todosData: {},
       showInputText: false,
       inputTextValue: "",
       showDialog: false,
@@ -200,7 +204,17 @@ export default {
         this.activityDetailData = await store.dispatch("detailActivity", {
           id: this.$route.params.id,
         });
+        this.loadTodos();
         this.sortTodoList(sortType, this.activityDetailData);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async loadTodos() {
+      try {
+        this.todosData = await store.dispatch("getTodos", {
+          id: this.$route.params.id,
+        });
       } catch (err) {
         console.log(err);
       }
@@ -251,6 +265,16 @@ export default {
   &__button {
     border: 1px solid #d5d5d5;
     border-radius: 50%;
+  }
+}
+
+.add-todo {
+  &__button {
+    background: #16abf8;
+
+    &:disabled {
+      opacity: 0.2;
+    }
   }
 }
 </style>

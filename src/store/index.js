@@ -138,6 +138,17 @@ export default new Vuex.Store({
         console.log(err);
       }
     },
+    async getTodos(context, payload) {
+      try {
+        let response = await axios.get(`${baseUrl}/todo-items`, {
+          activity_group_id: payload.activityId,
+        });
+
+        return response.data;
+      } catch (err) {
+        console.log(err);
+      }
+    },
     async detailTodo(context, payload) {
       try {
         let response = await axios.get(`${baseUrl}/todo-items/${payload.id}`);
