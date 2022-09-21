@@ -24,11 +24,17 @@
           v-for="(option, index) in options"
           data-cy="sort-selection"
           :key="index"
-          class="px-3 py-3 flex gap-2 transition-colors duration-300 cursor-pointer hover:bg-gray-200 sort-dropdown__item"
+          class="px-3 py-3 flex justify-between transition-colors duration-300 cursor-pointer hover:bg-gray-200 sort-dropdown__item"
           @mousedown.prevent="setOption(option)"
         >
-          <!-- <div class="mt-1 w-3 h-3 icon-sort-sm" style="color: #16abf8"></div> -->
-          <p>{{ option.title }}</p>
+          <div class="flex gap-3">
+            <div :class="`mt-0.5 w-5 h-5 icon-sort-${option.value}`"></div>
+            <p>{{ option.title }}</p>
+          </div>
+          <div
+            v-show="option.value === selectedOption.value"
+            class="mt-1 w-4 h-4 icon-sort-active"
+          ></div>
         </li>
       </ul>
     </transition>
@@ -44,20 +50,19 @@ export default {
   data() {
     return {
       isOptionsExpanded: false,
-      selectedOption: {},
+      selectedOption: { title: "Terbaru", value: "newest" },
       options: [
         { title: "Terbaru", value: "newest" },
         { title: "Terlama", value: "oldest" },
-        { title: "A-Z", value: "descending" },
-        { title: "Z-A", value: "ascending" },
-        { title: "Belum Selesai", value: "not_done" },
+        { title: "A-Z", value: "ascending" },
+        { title: "Z-A", value: "descending" },
+        { title: "Belum Selesai", value: "not-done" },
       ],
     };
   },
   watch: {
     selectedOption(val) {
-      console.log(val);
-      // this.$emit("get-priority", val.value);
+      this.$emit("load-detail-act", val.value);
     },
   },
   methods: {

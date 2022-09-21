@@ -137,7 +137,7 @@ export default {
           priority: this.input.priority,
         });
         this.toggleDialog(false);
-        this.$parent.loadDetailActivity();
+        this.$parent.loadDetailActivity("newest");
       } catch (err) {
         console.log(err);
       }
@@ -154,7 +154,7 @@ export default {
         });
 
         this.toggleDialog(false);
-        this.$parent.loadDetailActivity();
+        this.$parent.loadDetailActivity("newest");
       } catch (err) {
         console.log(err);
       }

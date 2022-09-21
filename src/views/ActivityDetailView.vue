@@ -35,7 +35,7 @@
           ></div>
         </div>
         <div class="flex gap-4">
-          <todo-sort-combobox />
+          <todo-sort-combobox @load-detail-act="loadDetailActivity" />
           <button
             data-cy="todo-add-button"
             class="px-8 py-3 rounded-3xl text-white text-lg font-medium add-button"
@@ -115,7 +115,7 @@ export default {
   }),
 
   mounted() {
-    this.loadDetailActivity();
+    this.loadDetailActivity("newest");
   },
 
   methods: {
@@ -174,19 +174,19 @@ export default {
           });
           break;
         case "descending":
-          data.todo_items.reverse((a, b) => {
+          data.todo_items.sort((a, b) => {
             const titleA = a.title.toLowerCase();
             const titleB = b.title.toLowerCase();
-            if (titleA < titleB) {
+            if (titleA > titleB) {
               return -1;
             }
-            if (titleA > titleB) {
+            if (titleA < titleB) {
               return 1;
             }
             return 0;
           });
           break;
-        case "not_done":
+        case "not-done":
           data.todo_items = data.todo_items.filter(
             (item) => item.is_active === 1
           );
@@ -195,12 +195,12 @@ export default {
           return true;
       }
     },
-    async loadDetailActivity() {
+    async loadDetailActivity(sortType) {
       try {
         this.activityDetailData = await store.dispatch("detailActivity", {
           id: this.$route.params.id,
         });
-        this.sortTodoList("newest", this.activityDetailData);
+        this.sortTodoList(sortType, this.activityDetailData);
       } catch (err) {
         console.log(err);
       }
@@ -221,7 +221,7 @@ export default {
             id: this.$route.params.id,
             title: this.inputTextValue,
           });
-          this.loadDetailActivity();
+          this.loadDetailActivity("newest");
           this.showInputText = false;
         } catch (err) {
           console.log(err);
