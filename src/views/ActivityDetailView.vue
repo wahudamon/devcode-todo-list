@@ -191,9 +191,19 @@ export default {
           });
           break;
         case "not-done":
-          data.todo_items = data.todo_items.filter(
-            (item) => item.is_active === 1
-          );
+          data.todo_items.sort((a, b) => {
+            const statusA = a.is_active;
+            const statusB = b.is_active;
+
+            if (statusA > statusB) {
+              return -1;
+            }
+            if (statusA < statusB) {
+              return 1;
+            }
+
+            return 0;
+          });
           break;
         default:
           return true;
