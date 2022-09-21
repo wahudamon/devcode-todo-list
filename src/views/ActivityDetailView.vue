@@ -150,14 +150,14 @@ export default {
           });
           break;
         case "oldest":
-          data.todo_items.reverse((a, b) => {
+          data.todo_items.sort((a, b) => {
             const orderA = a.id;
             const orderB = b.id;
 
-            if (orderA > orderB) {
+            if (orderA < orderB) {
               return -1;
             }
-            if (orderA < orderB) {
+            if (orderA > orderB) {
               return 1;
             }
 
