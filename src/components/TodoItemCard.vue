@@ -6,14 +6,14 @@
           <input
             v-model="todoCheckbox"
             data-cy="todo-item-checkbox"
-            class="cursor-pointer"
+            class="mt-1.5 w-4 h-4 cursor-pointer"
             type="checkbox"
           />
         </div>
         <div>
           <div
             data-cy="todo-item-priority-indicator"
-            class="mt-2 w-2 h-2 rounded-full"
+            class="mt-2 w-3 h-3 rounded-full"
             :style="{ background: priorityColor[todoItem.priority] }"
           ></div>
         </div>
@@ -21,7 +21,7 @@
           <p
             v-if="todoItem.is_active === 1"
             data-cy="todo-item-title"
-            class="text-md font-normal"
+            class="text-lg font-normal"
           >
             {{
               todoItem.title?.length > 40
@@ -32,7 +32,7 @@
           <p
             v-else-if="todoItem.is_active === 0"
             data-cy="todo-item-title"
-            class="text-md font-normal line-through"
+            class="text-lg font-normal line-through"
             style="color: #888888"
           >
             {{
@@ -44,7 +44,7 @@
         </div>
         <div
           data-cy="todo-item-edit-button"
-          class="cursor-pointer icon-edit-todo-item"
+          class="mt-0.5 cursor-pointer icon-edit-todo-item"
           @click="toggleInputDialog(true)"
         ></div>
       </div>

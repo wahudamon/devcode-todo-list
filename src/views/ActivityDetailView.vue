@@ -23,7 +23,7 @@
           <input
             v-show="showInputText"
             v-model="inputTextValue"
-            class="h-4/5 w-4/5 bg-inherit border-b-2 border-gray-700 text-3xl font-bold focus:outline-none"
+            class="h-4/5 w-4/5 bg-inherit text-3xl font-bold focus:outline-none todo-title__input"
             ref="todoTitleInput"
             type="text"
             @blur="updateTitle"
@@ -35,12 +35,13 @@
           ></div>
         </div>
         <div class="flex gap-4">
-          <button class="px-3 border border-gray-300 rounded-full">
-            <span class="icon-sort"></span>
-          </button>
+          <todo-sort-combobox @load-detail-act="loadDetailActivity" />
           <button
             data-cy="todo-add-button"
-            class="px-8 py-3 rounded-3xl text-white text-lg font-medium add-button"
+            class="px-8 py-3 rounded-3xl text-white text-lg font-medium add-todo__button"
+            :disabled="
+              activityDetailData?.todo_items?.length === todosData.limit
+            "
             @click="toggleInputDialog"
           >
             <span class="icon-plus"></span>
@@ -82,6 +83,7 @@
 <script>
 import EmptyStateImage from "@/components/EmptyStateImage.vue";
 import TodoItemCard from "@/components/TodoItemCard.vue";
+import TodoSortCombobox from "@/components/TodoSortCombobox.vue";
 import InputDialog from "@/components/InputDialog.vue";
 import ConfirmDialog from "@/components/ConfirmDialog.vue";
 import NotificationDialog from "@/components/NotificationDialog.vue";
@@ -98,12 +100,14 @@ export default {
     InputDialog,
     ConfirmDialog,
     NotificationDialog,
+    TodoSortCombobox,
   },
 
   data() {
     return {
       selectedTodo: {},
       activityDetailData: {},
+      todosData: {},
       showInputText: false,
       inputTextValue: "",
       showDialog: false,
@@ -115,7 +119,7 @@ export default {
   }),
 
   mounted() {
-    this.loadDetailActivity();
+    this.loadDetailActivity("newest");
   },
 
   methods: {
@@ -128,9 +132,87 @@ export default {
     resetSelectedTodo() {
       this.selectedTodo = {};
     },
-    async loadDetailActivity() {
+    sortTodoList(selection, data) {
+      switch (selection) {
+        case "newest":
+          data.todo_items.sort((a, b) => {
+            const orderA = a.id;
+            const orderB = b.id;
+
+            if (orderA > orderB) {
+              return -1;
+            }
+            if (orderA < orderB) {
+              return 1;
+            }
+
+            return 0;
+          });
+          break;
+        case "oldest":
+          data.todo_items.reverse((a, b) => {
+            const orderA = a.id;
+            const orderB = b.id;
+
+            if (orderA > orderB) {
+              return -1;
+            }
+            if (orderA < orderB) {
+              return 1;
+            }
+
+            return 0;
+          });
+          break;
+        case "ascending":
+          data.todo_items.sort((a, b) => {
+            const titleA = a.title.toLowerCase();
+            const titleB = b.title.toLowerCase();
+            if (titleA < titleB) {
+              return -1;
+            }
+            if (titleA > titleB) {
+              return 1;
+            }
+            return 0;
+          });
+          break;
+        case "descending":
+          data.todo_items.sort((a, b) => {
+            const titleA = a.title.toLowerCase();
+            const titleB = b.title.toLowerCase();
+            if (titleA > titleB) {
+              return -1;
+            }
+            if (titleA < titleB) {
+              return 1;
+            }
+            return 0;
+          });
+          break;
+        case "not-done":
+          data.todo_items = data.todo_items.filter(
+            (item) => item.is_active === 1
+          );
+          break;
+        default:
+          return true;
+      }
+    },
+    async loadDetailActivity(sortType) {
       try {
         this.activityDetailData = await store.dispatch("detailActivity", {
+          id: this.$route.params.id,
+        });
+        this.loadTodos();
+        this.sortTodoList(sortType, this.activityDetailData);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async loadTodos() {
+      try {
+        this.todosData = await store.dispatch("getTodos", {
           id: this.$route.params.id,
         });
       } catch (err) {
@@ -153,7 +235,7 @@ export default {
             id: this.$route.params.id,
             title: this.inputTextValue,
           });
-          this.loadDetailActivity();
+          this.loadDetailActivity("newest");
           this.showInputText = false;
         } catch (err) {
           console.log(err);
@@ -172,4 +254,27 @@ export default {
 
 <style lang="scss">
 @import "@/assets/icons/icons";
+
+.todo-title {
+  &__input {
+    border-bottom: 1px solid black;
+  }
+}
+
+.todo-sort {
+  &__button {
+    border: 1px solid #d5d5d5;
+    border-radius: 50%;
+  }
+}
+
+.add-todo {
+  &__button {
+    background: #16abf8;
+
+    &:disabled {
+      opacity: 0.2;
+    }
+  }
+}
 </style>

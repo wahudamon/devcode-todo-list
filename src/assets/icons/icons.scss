@@ -73,3 +73,91 @@
   vertical-align: middle;
   cursor: pointer;
 }
+
+.icon-sort {
+  width: 24px;
+  height: 24px;
+  background-image: url("@/assets/icons/arrows-sort_icon.svg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.icon-sort-sm {
+  width: 20px;
+  height: 20px;
+  background-image: url("@/assets/icons/arrows-sort_icon.svg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.icon-sort-active {
+  width: 20px;
+  height: 20px;
+  background-image: url("@/assets/icons/sort-active_icon.svg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.icon-sort-newest {
+  width: 20px;
+  height: 20px;
+  background-image: url("@/assets/icons/sort-newest_icon.svg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.icon-sort-oldest {
+  width: 20px;
+  height: 20px;
+  background-image: url("@/assets/icons/sort-oldest_icon.svg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.icon-sort-ascending {
+  width: 20px;
+  height: 20px;
+  background-image: url("@/assets/icons/sort-ascending_icon.svg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.icon-sort-descending {
+  width: 20px;
+  height: 20px;
+  background-image: url("@/assets/icons/sort-descending_icon.svg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.icon-sort-not-done {
+  width: 20px;
+  height: 20px;
+  background-image: url("@/assets/icons/sort-not-done_icon.svg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}

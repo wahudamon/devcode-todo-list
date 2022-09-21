@@ -58,6 +58,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "PriorityCombobox",
   props: {
@@ -77,7 +78,17 @@ export default {
       ],
     };
   },
+  computed: mapGetters({
+    showInputDialog: "showInputDialog",
+  }),
   watch: {
+    showInputDialog(val) {
+      if (val) {
+        this.$emit("get-priority", this.selectedOption.value);
+      } else {
+        this.selectedOption = this.options[2];
+      }
+    },
     selectedOption(val) {
       this.$emit("get-priority", val.value);
     },

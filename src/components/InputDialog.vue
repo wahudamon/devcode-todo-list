@@ -69,7 +69,7 @@
         <v-card-actions class="flex justify-end pt-12">
           <button
             data-cy="modal-add-save-button"
-            :disabled="input.title === ''"
+            :disabled="!input.title"
             class="px-6 py-2 text-white rounded-full submit-button"
             @click="onClickSubmit"
           >
@@ -137,7 +137,7 @@ export default {
           priority: this.input.priority,
         });
         this.toggleDialog(false);
-        this.$parent.loadDetailActivity();
+        this.$parent.loadDetailActivity("newest");
       } catch (err) {
         console.log(err);
       }
@@ -154,7 +154,7 @@ export default {
         });
 
         this.toggleDialog(false);
-        this.$parent.loadDetailActivity();
+        this.$parent.loadDetailActivity("newest");
       } catch (err) {
         console.log(err);
       }

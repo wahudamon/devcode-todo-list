@@ -83,7 +83,7 @@ export default {
         try {
           await store.dispatch("removeTodoItem", { id: this.selectedItem.id });
 
-          this.$parent.loadDetailActivity();
+          this.$parent.loadDetailActivity("newest");
           this.toggleDialog(false);
           this.toggleNotifDialog();
         } catch (err) {
