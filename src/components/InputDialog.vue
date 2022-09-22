@@ -1,6 +1,11 @@
 <template>
   <div data-app>
-    <v-dialog v-model="isShow" width="700">
+    <v-dialog
+      id="input-dialog"
+      v-model="isShow"
+      width="700"
+      class="overflow-y-clip"
+    >
       <v-card
         class="pt-6 px-6 bg-white rounded-md shadow-xl"
         style="height: 400px"
@@ -165,7 +170,11 @@ export default {
   },
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
+::v-deep .v-dialog {
+  overflow-y: unset;
+}
+
 .submit-button {
   background: #16abf8;
 
