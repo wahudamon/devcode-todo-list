@@ -43,7 +43,7 @@
           v-for="(option, index) in options"
           data-cy="modal-add-priority-item"
           :key="index"
-          class="px-3 py-2 flex gap-2 transition-colors duration-300 hover:bg-gray-200"
+          class="px-3 py-2 flex gap-2 cursor-pointer transition-colors duration-300 hover:bg-gray-200"
           @mousedown.prevent="setOption(option)"
         >
           <div
