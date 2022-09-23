@@ -4,11 +4,11 @@ A to-do list web app that created when i joined [Devcode Frontend Challenge](htt
 
 Here's some preview of the app.
 
-![preview1](./Preview-1.png)
+![preview-1](./preview-1.png)
 
-![preview2](./Preview-2.png)
+![preview-2](./preview-2.png)
 
-![preview3](./Preview-3.png)
+![preview-3](./preview-3.png)
 
 ## Technologies
 
