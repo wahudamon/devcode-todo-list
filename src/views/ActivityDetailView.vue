@@ -36,17 +36,12 @@
         </div>
         <div class="flex gap-4">
           <todo-sort-combobox @load-detail-act="loadDetailActivity" />
-          <button
+          <add-button
             data-cy="todo-add-button"
-            class="px-8 py-3 rounded-3xl text-white text-lg font-medium add-todo__button"
-            :disabled="
-              activityDetailData?.todo_items?.length === todosData.limit
-            "
-            @click="toggleInputDialog"
-          >
-            <span class="icon-plus"></span>
-            Tambah
-          </button>
+            class="add-todo__button"
+            :disabled="activityDetailData?.todo_items?.length === todosData.limit"
+            :clickEvent="toggleInputDialog"
+          />
         </div>
       </div>
       <div class="mt-8">
@@ -81,6 +76,7 @@
 </template>
 
 <script>
+import AddButton from "@/components/AddButton.vue"
 import EmptyStateImage from "@/components/EmptyStateImage.vue";
 import TodoItemCard from "@/components/TodoItemCard.vue";
 import TodoSortCombobox from "@/components/TodoSortCombobox.vue";
@@ -96,6 +92,7 @@ export default {
 
   components: {
     TodoItemCard,
+    AddButton,
     EmptyStateImage,
     InputDialog,
     ConfirmDialog,
